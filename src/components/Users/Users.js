@@ -2,6 +2,7 @@ import React from 'react';
 import {Preloader} from "../common/preloader/Preloader";
 import {NavLink} from "react-router-dom";
 import * as axios from "axios";
+import {followAPI, unfollowAPI} from "../../api/api";
 
 
 export const Users = ({currentPage, follow, unfollow, users, onPageChanged, getUsers, totalUsersCount, pageSize, isFetching}) => {
@@ -37,37 +38,8 @@ export const Users = ({currentPage, follow, unfollow, users, onPageChanged, getU
 
                     <div className='btn'>
                         {user.followed ?
-                            <button onClick={() => {
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${user.id}`, {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': '21b6fd0b-f892-4a38-acb4-3ec43e883c9a'
-                                    }
-                                })
-                                    .then(response => {
-
-                                        if (response.data.resultCode === 0) {
-                                            unfollow(user.id)
-                                        }
-                                    })
-
-                            }}> Unfollow </button> :
-                            <button onClick={() => {
-
-                                axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${user.id}`, {}, {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': '21b6fd0b-f892-4a38-acb4-3ec43e883c9a'
-                                    }
-                                })
-                                    .then(response => {
-                                        if (response.data.resultCode === 0) {
-                                            follow(user.id)
-                                        }
-                                    })
-
-
-                            }}>Follow</button>}
+                            <button onClick={() => unfollowAPI(user.id).then(resultCode => resultCode === 0 ? unfollow(user.id) : null)}> Unfollow </button> :
+                            <button onClick={() => followAPI(user.id).then(resultCode => resultCode === 0 ? follow(user.id) : null)}>Follow</button>}
                     </div>
 
                     <div className='user-block'>
