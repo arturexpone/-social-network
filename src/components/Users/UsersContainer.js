@@ -7,21 +7,26 @@ import {Users} from "./Users";
 export class UsersContainer extends React.Component {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true,
+            headers: {
+                'API-KEY' : '21b6fd0b-f892-4a38-acb4-3ec43e883c9a'
+            }
+        })
             .then(response => {
                 this.props.setLoader(false);
                 this.props.setUsers(response.data.items);
             })
     }
 
-    componentWillUnmount() {
-        console.log('Убрал')
-    }
 
     onPageChanged = (page) => {
         this.props.setCurrentPage(page);
         this.props.setLoader(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {withCredentials: true,
+            headers: {
+                'API-KEY' : '21b6fd0b-f892-4a38-acb4-3ec43e883c9a'
+            }})
             .then(response => {
                 this.props.setLoader(false);
                 this.props.setUsers(response.data.items)
