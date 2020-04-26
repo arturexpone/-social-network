@@ -1,5 +1,6 @@
 import React from 'react';
 import {Preloader} from "../common/preloader/Preloader";
+import {NavLink} from "react-router-dom";
 
 
 export const Users = ({currentPage, follow, unfollow, users, onPageChanged, getUsers, totalUsersCount, pageSize, isFetching }) => {
@@ -23,9 +24,11 @@ export const Users = ({currentPage, follow, unfollow, users, onPageChanged, getU
             {users.map(user => {
                 return <div key={user.id} className='users-block'>
                     <div className='user-block'>
+                        <NavLink to={`/profile/${user.id}`}>
                         <img
                             src={user.photos.small ? user.photos.small : 'https://pngimg.com/uploads/anonymous_mask/anonymous_mask_PNG31.png'}
                             className='user-img'/>
+                        </NavLink>
                     </div>
                     <div className='user-block'>
                         <span className='user-name'>{user.name}</span>
