@@ -20,6 +20,6 @@ export const usersAPI = {
         return instance.get(`/profile/${id}`).then(response => response.data);
     },
     getAuthUserData: () => {
-        return instance.get(`/auth/me`).then(response => response.data.data);
+        return instance.get(`/auth/me`).then(response => response.data);
     }
 }
