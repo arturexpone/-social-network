@@ -5,12 +5,13 @@ import * as axios from "axios";
 import {followAPI, unfollowAPI} from "../../api/api";
 
 
-export const Users = ({currentPage, follow, unfollow, users, onPageChanged, getUsers, totalUsersCount, pageSize, isFetching}) => {
+export const Users = ({currentPage, follow, unfollow, users, onPageChanged, getUsers, totalUsersCount, pageSize, isFetching, followingInProgress, toggleFollowingProgress}) => {
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+
     return (
         <div>
             <div>
@@ -38,8 +39,24 @@ export const Users = ({currentPage, follow, unfollow, users, onPageChanged, getU
 
                     <div className='btn'>
                         {user.followed ?
-                            <button onClick={() => unfollowAPI(user.id).then(resultCode => resultCode === 0 ? unfollow(user.id) : null)}> Unfollow </button> :
-                            <button onClick={() => followAPI(user.id).then(resultCode => resultCode === 0 ? follow(user.id) : null)}>Follow</button>}
+                            <button disabled={followingInProgress.some(u => user.id === u)} onClick={() => {
+                                toggleFollowingProgress(true, user.id);
+                                unfollowAPI(user.id).then(resultCode => {
+                                    if (resultCode === 0) {
+                                        unfollow(user.id);
+                                        toggleFollowingProgress(false, user.id);
+                                    }
+                                })
+                            }}> Unfollow </button> :
+                            <button disabled={followingInProgress.some(u => user.id === u)} onClick={() => {
+                                toggleFollowingProgress(true, user.id);
+                                followAPI(user.id).then(resultCode => {
+                                    if (resultCode === 0) {
+                                        follow(user.id);
+                                        toggleFollowingProgress(false, user.id);
+                                    }
+                                })
+                            }}>Follow</button>}
                     </div>
 
                     <div className='user-block'>
