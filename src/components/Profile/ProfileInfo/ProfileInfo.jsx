@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import {Preloader} from "../../common/preloader/Preloader";
+import {ProfileStatus} from "./ProfileStatus";
 
 const ProfileInfo = ({profile}) => {
-
     if (!profile) {
         return <Preloader/>
     }
@@ -13,7 +13,8 @@ const ProfileInfo = ({profile}) => {
             <div className={s.descriptionBlock}>
                 <img src={profile.photos.small}/>
                 <br/>
-                <span className={s.contactsSpan}>{profile.aboutMe}</span>
+                <ProfileStatus status={profile.aboutMe}/>
+
             </div>
             <div className={s.lookingForAJob}>
                 <h4>Look for work:</h4>
