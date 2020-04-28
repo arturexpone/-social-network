@@ -6,6 +6,8 @@ import {
     toggleFollowingProgress, getUsersThunkCreator, followThunkCreator
 } from "../../redux/users-reducer";
 import {Users} from "./Users";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 export class UsersContainer extends React.Component {
 
@@ -44,4 +46,8 @@ const mapStateToProps = (state) =>{
     followingInProgress: state.users.followingInProgress
 }};
 
-export default connect(mapStateToProps, {setUsers, setCurrentPage, toggleFollowingProgress, getUsersThunkCreator, followThunkCreator})(UsersContainer);
+
+export default compose(
+    connect(mapStateToProps, {setUsers, setCurrentPage, toggleFollowingProgress, getUsersThunkCreator, followThunkCreator}),
+    withAuthRedirect
+    )(UsersContainer);
