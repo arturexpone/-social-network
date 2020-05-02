@@ -1,6 +1,6 @@
 export const required = (value) => {
     if (value) return undefined;
-    return 'error message';
+    return 'Please enter your details';
 }
 
 export const maxLengthCreator = (maxLength) => (value) => {
