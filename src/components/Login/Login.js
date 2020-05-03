@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {compose} from "redux";
 import {Redirect} from "react-router-dom";
+import s from "../common/FormControls/FormControls.module.css"
 
 const maxLength = maxLengthCreator(30);
 
@@ -15,9 +16,10 @@ const LoginForm = (props) => {
         <form onSubmit={props.handleSubmit}>
             <div><Field type="text" placeholder='Email' validate={[required, maxLength]} name={'email'} component={Input}/></div>
             <div><Field type="password" placeholder='Password' validate={[required, maxLength]} name={'password'} component={Input}/></div>
-            <div><Field type="checkbox" component={Input} validate={[required, maxLength]} name={'rememberMe'}/>remember me</div>
+            <div><Field type="checkbox" component={Input} name={'rememberMe'}/>remember me</div>
             <div>{props.isCaptcha ? <img src={props.urlCaptcha} alt=""/> : null}</div>
             <div>{props.isCaptcha ? <Field type="text" component={Input} name={'captcha'}/> : null}</div>
+            {props.error && <div className={s.formSummaryError}>{props.error}</div>}
             <div><button>Login</button></div>
         </form>
     )
@@ -27,8 +29,7 @@ const LoginReduxForm = reduxForm({form: 'Login'})(LoginForm);
 
 const Login = (props) => {
     function onSubmit (formData) {
-        debugger
-        props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
+        props.login(formData.email, formData.password, formData.rememberMe = false, formData.captcha)
     };
 
     if (props.isAuth) {
