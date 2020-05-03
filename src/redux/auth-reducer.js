@@ -43,16 +43,13 @@ export const getAuthUserData = () => (dispatch) => {
         })
 };
 
-export const login = (email, password, rememberMe) => (dispatch) => {
-    authAPI.login(email, password, rememberMe).then(data => {
+export const login = (email, password, rememberMe, captcha) => (dispatch) => {
+    authAPI.login(email, password, rememberMe, captcha).then(data => {
             if (data.resultCode === 0) {
                 dispatch(getAuthUserData())
-                dispatch(setCaptcha(false))
             } else if (data.resultCode === 10) {
                 authAPI.captcha().then(response => {
-                    debugger
                     dispatch(setCaptcha(true, response.data.url))
-
                 })
 
             }
