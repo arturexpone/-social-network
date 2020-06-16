@@ -1,12 +1,10 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
 const App = () => {
-    return (
-        <div className='app-wrapper'>
+  return <div className='app-wrapper'>
 
-        </div>
-    )
-}
+  </div>;
+};
 
 export default App;
