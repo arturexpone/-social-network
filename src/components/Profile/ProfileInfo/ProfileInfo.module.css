@@ -1,0 +1,41 @@
+.profileWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px dashed yellow;
+}
+
+.descriptionBlock {
+    height: 290px;
+    padding: 25px;
+    border-right: 1px dashed yellow;
+}
+
+.contacts {
+    height: 290px;
+    padding: 25px;
+    border-right: 1px dashed yellow;
+}
+
+.lookingForAJob {
+    height: 290px;
+    padding: 25px;
+    border-right: 1px dashed yellow;
+}
+
+.lookingForAJobDescription {
+    height: 290px;
+    padding: 25px;
+    border-right: 1px dashed yellow;
+}
+
+.fullName {
+    height: 290px;
+    padding: 25px;
+    border-right: 1px dashed yellow;
+}
+
+.contactsSpan {
+    font-weight: bold;
+}

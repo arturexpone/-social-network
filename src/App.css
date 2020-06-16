@@ -1,0 +1,85 @@
+.app-wrapper {
+    margin: 0 auto;
+    display: grid;
+    width: 1200px;
+    grid-template-areas: "h h" "n c";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 10px;
+}
+
+.app-wrapper-content {
+    padding: 10px;
+    grid-area: c;
+    background-color: cornflowerblue;
+}
+
+.app-wrapper-content .user-img {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+ }
+
+.app-wrapper-content div button {
+    margin-left: 3.5%;
+    margin-bottom: 10px;
+}
+
+.app-wrapper-content .user-name {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Arial Black";;
+}
+
+.app-wrapper-content .users-block {
+    display: flex;
+    width: 70%;
+}
+
+.app-wrapper-content .user-block {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-items: center;
+    padding: 10px;
+    border-bottom: 1px dashed yellow;
+}
+
+.btn {
+    margin-top: 6%;
+    margin-left: -18%;
+    margin-right: 2%;
+    opacity: 0.8;
+}
+
+.btn-get-users {
+    width: 30%;
+    position: relative;
+    margin-top: 10px;
+    padding: 15px;
+    background-color: gray;
+    border: none;
+}
+
+.btn-get-users:hover {
+    color: white;
+}
+
+.pagination {
+    margin-left: 25px;
+    padding: 5px;
+    font-size: 25px;
+    color: floralwhite;
+}
+
+.selected-page {
+    color: darkblue;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.get-users-block {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+}
