@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Form, Segment} from 'semantic-ui-react';
 
-export const EventForm = () => {
+export const EventForm = ({handlerCancelForm}) => {
   return (
       <Segment>
         <Form>
@@ -28,7 +28,7 @@ export const EventForm = () => {
           <Button positive type='submit'>
             Отправить
           </Button>
-          <Button type='button'>Отменить</Button>
+          <Button onClick={handlerCancelForm} type='button'>Отменить</Button>
         </Form>
       </Segment>
   )

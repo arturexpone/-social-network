@@ -64,14 +64,18 @@ export const EventDashboard = () => {
 
   const [state, setState] = useState(initialState);
 
+  const handlerCancelForm = () => {
+    setState({...state, isOpen: false});
+  };
+
   return (
     <Grid>
       <Grid.Column width={10}>
         <EventList events={state.events}/>
       </Grid.Column>
       <Grid.Column width={6}>
-        <Button onClick={()=> setState({...state, isOpen: !state.isOpen})} positive content='Добавить мероприятие'/>
-        {state.isOpen && <EventForm />}
+        <Button onClick={()=> setState({...state, isOpen: true})} positive content='Добавить мероприятие'/>
+        {state.isOpen && <EventForm handlerCancelForm={handlerCancelForm}/>}
       </Grid.Column>
     </Grid>
   )
