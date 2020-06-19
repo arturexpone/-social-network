@@ -5,6 +5,8 @@ import {Button, Grid} from 'semantic-ui-react';
 import {EventList} from '../EventList/EventList';
 import {EventForm} from '../EventForm/EventForm';
 
+import logo from '../../../assets/images/logo.png';
+
 export const EventDashboard = () => {
 
   const initialState = {
@@ -68,6 +70,33 @@ export const EventDashboard = () => {
     setState({...state, isOpen: false});
   };
 
+  const addEvent = (event) => {
+    const newEvent = {
+      id: state.events[state.events.length] + 1,
+      title: event.eventName,
+      date: event.eventDate,
+      category: '',
+      description: '',
+      city: event.city,
+      venue: event.venue,
+      hostedBy: event.postedBy,
+      hostPhotoURL: logo,
+      attendees: [
+        {
+          id: Math.random() * 10 + 2,
+          name: '',
+          photoURL: ''
+        },
+        {
+          id: Math.random() * 10 + 2,
+          name: '',
+          photoURL: ''
+        }
+      ]
+    };
+    setState({...state, events: [...state.events, newEvent]});
+  };
+
   return (
     <Grid>
       <Grid.Column width={10}>
@@ -75,7 +104,7 @@ export const EventDashboard = () => {
       </Grid.Column>
       <Grid.Column width={6}>
         <Button onClick={()=> setState({...state, isOpen: true})} positive content='Добавить мероприятие'/>
-        {state.isOpen && <EventForm handlerCancelForm={handlerCancelForm}/>}
+        {state.isOpen && <EventForm handlerCancelForm={handlerCancelForm} addEvent={addEvent}/>}
       </Grid.Column>
     </Grid>
   )

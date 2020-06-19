@@ -1,20 +1,21 @@
 import React, {useState} from 'react';
 import {Button, Form, Segment} from 'semantic-ui-react';
 
-export const EventForm = ({handlerCancelForm}) => {
+export const EventForm = ({handlerCancelForm, addEvent}) => {
 
   const initialState = {
     eventDate: '',
     eventName: '',
     city: '',
     venue: '',
-    firstUserName: ''
+    postedBy: ''
   };
   const [state, setState] = useState(initialState);
 
   const onSubmit = (e) => {
     e.preventDefault();
-
+    addEvent(state);
+    setState(initialState);
   }
 
   const changeState = e => {
@@ -65,9 +66,9 @@ export const EventForm = ({handlerCancelForm}) => {
           <Form.Field>
             <label>Кем размещается</label>
             <input
-              name='firstUserName'
+              name='postedBy'
               placeholder='Введите Ваше имя'
-              value={state.firstUserName}
+              value={state.postedBy}
               onChange={(e) => changeState(e)}
             />
           </Form.Field>
