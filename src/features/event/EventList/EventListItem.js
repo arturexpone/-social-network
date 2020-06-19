@@ -3,17 +3,22 @@ import React from 'react';
 import {Button, Icon, Item, List, Segment} from 'semantic-ui-react';
 import {EventListAttendee} from './EventListAttendee';
 
-export const EventListItem = () => {
+export const EventListItem = (props) => {
+
+  const {id, event} = props;
+
+  const attendeeReadyMount = event.attendees.map(a => <EventListAttendee key={a.id} attendee={a}/>);
+
   return (
     <Segment.Group>
       <Segment>
         <Item.Group>
           <Item>
-            <Item.Image size='tiny' circular src='https://randomuser.me/api/portraits/women/42.jpg' />
+            <Item.Image size='tiny' circular src={event.hostPhotoURL} />
             <Item.Content>
-              <Item.Header as='a'>Название поста</Item.Header>
+              <Item.Header as='a'>{event.title}</Item.Header>
               <Item.Description>
-                Размещено <a>пользователь</a>
+                Размещено <a>{event.hostedBy}</a>
               </Item.Description>
             </Item.Content>
           </Item>
@@ -21,19 +26,17 @@ export const EventListItem = () => {
       </Segment>
       <Segment>
           <span>
-            <Icon name='clock' />
-            <Icon name='marker' />
+            <Icon name='clock' /> {event.date}
+            <Icon name='marker' /> {event.venue}
           </span>
       </Segment>
       <Segment secondary>
         <List horizontal>
-          <EventListAttendee />
-          <EventListAttendee />
-          <EventListAttendee />
+          {attendeeReadyMount}
         </List>
       </Segment>
       <Segment clearing>
-        <span>Описание будет здесь</span>
+        <span>{event.description}</span>
         <Button as='a' color='teal' floated='right' content='View' />
       </Segment>
     </Segment.Group>
