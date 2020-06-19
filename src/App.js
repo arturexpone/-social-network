@@ -1,10 +1,17 @@
-import React from "react";
-import "./App.css";
+import React from 'react';
+import {Button, Container} from 'semantic-ui-react';
 
-const App = () => {
-  return <div className='app-wrapper'>
+import {EventDashboard} from './features/event/EventDashboard';
+import {NavBar} from './features/nav/NavBar/NavBar';
 
-  </div>;
+export const App = () => {
+  return (
+    <>
+      <NavBar />
+      <Container className='main'>
+          <EventDashboard />
+      </Container>
+      </>
+  );
 };
 
-export default App;
