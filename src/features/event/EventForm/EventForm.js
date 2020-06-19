@@ -1,29 +1,75 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Form, Segment} from 'semantic-ui-react';
 
 export const EventForm = ({handlerCancelForm}) => {
+
+  const initialState = {
+    eventDate: '',
+    eventName: '',
+    city: '',
+    venue: '',
+    firstUserName: ''
+  };
+  const [state, setState] = useState(initialState);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+  }
+
+  const changeState = e => {
+    setState({...state, [e.target.name]: e.target.value});
+  }
+
+
   return (
       <Segment>
-        <Form>
+        <Form onSubmit={onSubmit}>
           <Form.Field>
             <label>Название мероприятия</label>
-            <input placeholder='Имя' />
+            <input
+              name='eventName'
+              placeholder='Имя'
+              value={state.eventName}
+              onChange={(e) => changeState(e)}
+            />
           </Form.Field>
           <Form.Field>
             <label>Дата события</label>
-            <input type="date" placeholder='Дата события' />
+            <input
+              name='eventDate'
+              type="date"
+              placeholder='Дата события'
+              value={state.eventDate}
+              onChange={(e) => changeState(e)}
+            />
           </Form.Field>
           <Form.Field>
             <label>Город</label>
-            <input placeholder='Мероприятие в городе' />
+            <input
+              name='city'
+              placeholder='Введите название города'
+              value={state.city}
+              onChange={(e) => changeState(e)}
+            />
           </Form.Field>
           <Form.Field>
             <label>Место проведения</label>
-            <input placeholder='Введите место проведения мероприятия' />
+            <input
+              name='venue'
+              placeholder='Введите место проведения мероприятия'
+              value={state.venue}
+              onChange={(e) => changeState(e)}
+            />
           </Form.Field>
           <Form.Field>
             <label>Кем размещается</label>
-            <input placeholder='Введите Ваше имя' />
+            <input
+              name='firstUserName'
+              placeholder='Введите Ваше имя'
+              value={state.firstUserName}
+              onChange={(e) => changeState(e)}
+            />
           </Form.Field>
           <Button positive type='submit'>
             Отправить
