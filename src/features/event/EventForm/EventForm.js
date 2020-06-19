@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Form, Segment} from 'semantic-ui-react';
 
-export const EventForm = ({handlerCancelForm, addEvent}) => {
+export const EventForm = ({handlerCancelForm, addEvent, handleDeleteEvent}) => {
 
   const initialState = {
     eventDate: '',

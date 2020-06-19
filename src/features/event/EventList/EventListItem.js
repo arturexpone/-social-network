@@ -5,7 +5,7 @@ import {EventListAttendee} from './EventListAttendee';
 
 export const EventListItem = (props) => {
 
-  const {id, event} = props;
+  const {id, event, handleDeleteEvent} = props;
 
   const attendeeReadyMount = event.attendees.map(a => <EventListAttendee key={a.id} attendee={a}/>);
 
@@ -37,7 +37,21 @@ export const EventListItem = (props) => {
       </Segment>
       <Segment clearing>
         <span>{event.description}</span>
-        <Button as='a' color='teal' floated='right' content='View' />
+        <br/>
+        <br/>
+        <Button
+          as='a'
+          color='teal'
+          floated='right'
+          content='Подробнее...'
+        />
+        <Button
+          as='a'
+          color='red'
+          floated='right'
+          content='Удалить'
+          onClick={() => handleDeleteEvent(event.id)}
+        />
       </Segment>
     </Segment.Group>
   )

@@ -61,18 +61,16 @@ export const EventDashboard = () => {
       }
       ],
     isOpen: false,
+    selectedEvent: null
   };
-
-
   const [state, setState] = useState(initialState);
 
   const handlerCancelForm = () => {
     setState({...state, isOpen: false});
   };
-
   const addEvent = (event) => {
     const newEvent = {
-      id: state.events[state.events.length] + 1,
+      id: state.events[state.events.length - 1].id + 1,
       title: event.eventName,
       date: event.eventDate,
       category: '',
@@ -96,15 +94,28 @@ export const EventDashboard = () => {
     };
     setState({...state, events: [...state.events, newEvent]});
   };
+  const handleDeleteEvent = (id) => {
+    const updateEventArray = state.events.filter(e => e.id !== id);
+    setState({...state, events: updateEventArray});
+  };
 
   return (
     <Grid>
       <Grid.Column width={10}>
-        <EventList events={state.events}/>
+        <EventList
+          events={state.events}
+          handleDeleteEvent={handleDeleteEvent}
+        />
       </Grid.Column>
       <Grid.Column width={6}>
         <Button onClick={()=> setState({...state, isOpen: true})} positive content='Добавить мероприятие'/>
-        {state.isOpen && <EventForm handlerCancelForm={handlerCancelForm} addEvent={addEvent}/>}
+        { state.isOpen
+          &&
+          <EventForm
+            handlerCancelForm={handlerCancelForm}
+            addEvent={addEvent}
+          />
+        }
       </Grid.Column>
     </Grid>
   )
