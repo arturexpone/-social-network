@@ -23,7 +23,7 @@ export const App = () => {
           <Container className='main'>
             <Switch>
               <Route exact path='/events' component={EventDashboard}/>
-              <Route exact path='/event/:id' component={EventDetailsPage}/>
+              <Route exact path='/events/:id' component={EventDetailsPage}/>
               <Route exact path='/people' component={PeopleDashboard}/>
               <Route exact path='/profile/:id' component={UserDetailedPage}/>
               <Route path='/settings' component={SettingsDashboard}/>

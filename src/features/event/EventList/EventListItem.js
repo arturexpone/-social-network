@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Button, Icon, Item, List, Segment} from 'semantic-ui-react';
 import {EventListAttendee} from './EventListAttendee';
+import {Link} from 'react-router-dom';
 
 export const EventListItem = (props) => {
 
@@ -18,7 +19,7 @@ export const EventListItem = (props) => {
             <Item.Content>
               <Item.Header as='a'>{event.title}</Item.Header>
               <Item.Description>
-                Размещено <a>{event.hostedBy}</a>
+                Hosted by <a>{event.hostedBy}</a>
               </Item.Description>
             </Item.Content>
           </Item>
@@ -41,16 +42,17 @@ export const EventListItem = (props) => {
         <br/>
         <Button
           as='a'
-          color='teal'
-          floated='right'
-          content='Подробнее...'
-        />
-        <Button
-          as='a'
           color='red'
           floated='right'
-          content='Удалить'
+          content='Delete'
           onClick={() => handleDeleteEvent(event.id)}
+        />
+        <Button
+          as={Link}
+          to={`/events/${id}`}
+          color='teal'
+          floated='right'
+          content='View'
         />
       </Segment>
     </Segment.Group>

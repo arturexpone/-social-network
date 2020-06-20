@@ -33,7 +33,7 @@ const NavBar = (props) => {
           <img src={logo} alt='logo' />
           Social Network
         </Menu.Item>
-        <Menu.Item as={NavLink} to='/events' name='Events' />
+        <Menu.Item as={NavLink} exact to='/events' name='Events' />
         <Menu.Item as={NavLink} to='/people' name='People' />
         <Menu.Item>
           <Button
@@ -42,7 +42,7 @@ const NavBar = (props) => {
             floated='right'
             positive
             inverted
-            content='Добавить пост'
+            content='Add post'
           />
         </Menu.Item>
         {state.isAuthenticated ? <SignedInMenu signIn={handleSignOut}/> : <SignedOutMenu signOut={handleSignIn}/>}

@@ -52,7 +52,7 @@ const EventDashboard = (props) => {
         />
       </Grid.Column>
       <Grid.Column width={6}>
-        <Button onClick={()=> setIsOpen(true)} positive content='Добавить мероприятие'/>
+        <Button onClick={()=> setIsOpen(true)} positive content='Add event'/>
         { isOpen
           &&
           <EventForm
@@ -69,4 +69,6 @@ const mapStateToProps = (state) => ({
   events: state.events
 });
 
-export default connect(mapStateToProps, {createEvent, updateEvent, deleteEvent})(EventDashboard);
+export default connect(mapStateToProps,
+  {createEvent, updateEvent, deleteEvent}
+  )(EventDashboard);
