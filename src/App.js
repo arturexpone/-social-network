@@ -2,7 +2,7 @@ import React from 'react';
 import {Container} from 'semantic-ui-react';
 import {Route, Switch} from 'react-router-dom';
 
-import {EventDashboard} from './features/event/EventDashboard/EventDashboard';
+import EventDashboard from './features/event/EventDashboard/EventDashboard';
 import NavBar from './features/nav/NavBar/NavBar';
 import {HomePage} from './features/home/HomePage';
 import {EventDetailsPage} from './features/event/EventDetailed/EventDetailedPage';
