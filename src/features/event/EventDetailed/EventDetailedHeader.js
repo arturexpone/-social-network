@@ -5,6 +5,10 @@ import drinks from '../../../assets/categoryImages/drinks.jpg'
 
 export const EventDetailedHeader = (props) => {
 
+  debugger
+
+  const {date, hostedBy} = props;
+
   const eventImageStyle = {
     filter: 'brightness(30%)'
   };
@@ -32,9 +36,9 @@ export const EventDetailedHeader = (props) => {
                   content="Event Title"
                   style={{ color: 'white' }}
                 />
-                <p>Event Date</p>
+                <p>{`Event Date: ${date}`}</p>
                 <p>
-                  Hosted by <strong>Hosted by</strong>
+                  Hosted by <strong>{hostedBy}</strong>
                 </p>
               </Item.Content>
             </Item>

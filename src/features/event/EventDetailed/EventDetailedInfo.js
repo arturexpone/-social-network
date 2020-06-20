@@ -2,6 +2,9 @@ import React from 'react';
 import {Button, Grid, Icon, Segment} from 'semantic-ui-react';
 
 export const EventDetailedInfo = (props) => {
+
+  const {description, date, venue} = props;
+
   return (
     <Segment.Group>
       <Segment attached="top">
@@ -10,7 +13,7 @@ export const EventDetailedInfo = (props) => {
             <Icon size="large" color="teal" name="info" />
           </Grid.Column>
           <Grid.Column width={15}>
-            <p>Description of Event</p>
+            <p>{description}</p>
           </Grid.Column>
         </Grid>
       </Segment>
@@ -20,7 +23,7 @@ export const EventDetailedInfo = (props) => {
             <Icon name="calendar" size="large" color="teal" />
           </Grid.Column>
           <Grid.Column width={15}>
-            <span>Event Date</span>
+            <span>{date}</span>
           </Grid.Column>
         </Grid>
       </Segment>
@@ -30,7 +33,7 @@ export const EventDetailedInfo = (props) => {
             <Icon name="marker" size="large" color="teal" />
           </Grid.Column>
           <Grid.Column width={11}>
-            <span>Event Venue</span>
+            <span>{venue}</span>
           </Grid.Column>
           <Grid.Column width={4}>
             <Button color="teal" size="tiny" content="Show Map" />
