@@ -1,13 +1,12 @@
 import React from 'react';
 import {Button, Header, Image, Item, Segment} from 'semantic-ui-react';
 
-import drinks from '../../../assets/categoryImages/drinks.jpg'
 
 export const EventDetailedHeader = (props) => {
 
-  debugger
+  const {date, hostedBy, category, title} = props;
 
-  const {date, hostedBy} = props;
+  const img = require(`../../../assets/categoryImages/${category}.jpg`);
 
   const eventImageStyle = {
     filter: 'brightness(30%)'
@@ -25,7 +24,7 @@ export const EventDetailedHeader = (props) => {
   return (
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: '0' }}>
-        <Image src={drinks} fluid style={eventImageStyle}/>
+        <Image src={img} fluid style={eventImageStyle}/>
 
         <Segment basic style={eventImageTextStyle}>
           <Item.Group>
@@ -33,7 +32,7 @@ export const EventDetailedHeader = (props) => {
               <Item.Content>
                 <Header
                   size="huge"
-                  content="Event Title"
+                  content={title}
                   style={{ color: 'white' }}
                 />
                 <p>{`Event Date: ${date}`}</p>

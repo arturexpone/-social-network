@@ -12,18 +12,27 @@ const EventDetailsPage = (props) => {
 
   const {events, match} = props;
 
-  const event = events.slice(e => match.params.id === e.id).pop();
+  const event = events.filter(e => match.params.id === e.id).pop();
 
   return (
       <Grid>
         <Grid.Column width={10}>
-          <EventDetailedHeader date={event.date} hostedBy={event.hostedBy}/>
-          <EventDetailedInfo description={event.description} date={event.date} venue={event.venue}/>
+          <EventDetailedHeader
+            date={event.date}
+            hostedBy={event.hostedBy}
+            category={event.category}
+            title={event.title}
+          />
+          <EventDetailedInfo
+            description={event.description}
+            date={event.date}
+            venue={event.venue}
+          />
           <EventDetailedChat />
         </Grid.Column>
 
         <Grid.Column width={6}>
-          <EventDetailedSidebar />
+          <EventDetailedSidebar event={event}/>
         </Grid.Column>
       </Grid>
   )
