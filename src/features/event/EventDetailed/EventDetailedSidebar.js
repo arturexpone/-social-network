@@ -1,8 +1,6 @@
 import React from 'react';
 import {Item, Label, List, Segment} from 'semantic-ui-react';
 
-import user from '../../../assets/images/user.png'
-
 export const EventDetailedSidebar = ({event}) => {
 
   const {attendees} = event;
