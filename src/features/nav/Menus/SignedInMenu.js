@@ -20,7 +20,7 @@ export const SignedInMenu = (props) => {
             <Dropdown.Item
               text="Sign Out"
               icon="power"
-              onClick={() => signIn(false)}
+              onClick={signIn}
             />
           </Dropdown.Menu>
         </Dropdown>

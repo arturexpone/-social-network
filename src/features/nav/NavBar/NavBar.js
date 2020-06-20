@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Container, Menu} from 'semantic-ui-react';
+import {withRouter} from 'react-router';
 
 import {Link, NavLink} from 'react-router-dom';
 import {SignedOutMenu} from '../Menus/SignedOutMenu';
@@ -7,7 +8,7 @@ import {SignedInMenu} from '../Menus/SignedInMenu';
 
 import logo from '../../../assets/images/logo.png';
 
-export const NavBar = (props) => {
+const NavBar = (props) => {
 
   const {history} = props;
 
@@ -16,13 +17,14 @@ export const NavBar = (props) => {
   };
   const [state, setState] = useState(initialState);
 
-  const signInAndSignOut = (value) => {
-    setState({...state, isAuthenticated: value});
-    if (!state.isAuthenticated) {
-      history.push('/');
-    }
+  const handleSignIn = () => {
+    setState({...state, isAuthenticated: true});
   }
 
+  const handleSignOut = () => {
+    setState({...state, isAuthenticated: false});
+    history.push('/');
+  }
 
   return (
     <Menu inverted fixed='top'>
@@ -43,8 +45,10 @@ export const NavBar = (props) => {
             content='Добавить пост'
           />
         </Menu.Item>
-        {state.isAuthenticated ? <SignedInMenu signIn={signInAndSignOut}/> : <SignedOutMenu signOut={signInAndSignOut}/>}
+        {state.isAuthenticated ? <SignedInMenu signIn={handleSignOut}/> : <SignedOutMenu signOut={handleSignIn}/>}
       </Container>
     </Menu>
   )
-}
+};
+
+export default withRouter(NavBar);
