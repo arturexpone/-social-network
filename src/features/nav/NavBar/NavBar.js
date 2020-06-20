@@ -1,10 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Container, Menu} from 'semantic-ui-react';
 
-import logo from '../../../assets/images/logo.png';
 import {Link, NavLink} from 'react-router-dom';
+import {SignedOutMenu} from '../Menus/SignedOutMenu';
+import {SignedInMenu} from '../Menus/SignedInMenu';
 
-export const NavBar = () => {
+import logo from '../../../assets/images/logo.png';
+
+export const NavBar = (props) => {
+
+  const {history} = props;
+
+  const initialState = {
+    isAuthenticated: true,
+  };
+  const [state, setState] = useState(initialState);
+
+  const signInAndSignOut = (value) => {
+    setState({...state, isAuthenticated: value});
+    if (!state.isAuthenticated) {
+      history.push('/');
+    }
+  }
+
+
   return (
     <Menu inverted fixed='top'>
       <Container>
@@ -24,10 +43,7 @@ export const NavBar = () => {
             content='Добавить пост'
           />
         </Menu.Item>
-        <Menu.Item position='right'>
-          <Button basic inverted content='Login' />
-          <Button basic inverted content="Sign Out" style={{marginLeft: '0.5em'}} />
-        </Menu.Item>
+        {state.isAuthenticated ? <SignedInMenu signIn={signInAndSignOut}/> : <SignedOutMenu signOut={signInAndSignOut}/>}
       </Container>
     </Menu>
   )
