@@ -26,7 +26,7 @@ export const App = () => {
               <Route exact path='/event/:id' component={EventDetailsPage}/>
               <Route exact path='/people' component={PeopleDashboard}/>
               <Route exact path='/profile/:id' component={UserDetailedPage}/>
-              <Route exact path='/settings' component={SettingsDashboard}/>
+              <Route path='/settings' component={SettingsDashboard}/>
               <Route exact path='/create-event' component={EventForm}/>
             </Switch>
           </Container>
