@@ -15,19 +15,23 @@ import {EventForm} from './features/event/EventForm/EventForm';
 export const App = () => {
   return (
     <>
-      <NavBar />
-      <Container className='main'>
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route exact path='/events' component={EventDashboard} />
-          <Route exact path='/event/:id' component={EventDetailsPage} />
-          <Route exact path='/people' component={PeopleDashboard} />
-          <Route exact path='/profile/:id' component={UserDetailedPage} />
-          <Route exact path='/settings' component={SettingsDashboard} />
-          <Route exact path='/create-event' component={EventForm} />
-        </Switch>
-      </Container>
-      </>
+      <Route exact path='/' component={HomePage}/>
+      <Route path='/(.+)' render={() => (
+        <>
+          <NavBar/>
+          <Container className='main'>
+            <Switch>
+              <Route exact path='/events' component={EventDashboard}/>
+              <Route exact path='/event/:id' component={EventDetailsPage}/>
+              <Route exact path='/people' component={PeopleDashboard}/>
+              <Route exact path='/profile/:id' component={UserDetailedPage}/>
+              <Route exact path='/settings' component={SettingsDashboard}/>
+              <Route exact path='/create-event' component={EventForm}/>
+            </Switch>
+          </Container>
+        </>
+      )}/>
+    </>
   );
 };
 
