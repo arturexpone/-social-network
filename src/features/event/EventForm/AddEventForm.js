@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {Button, Form, Segment} from 'semantic-ui-react';
 import {connect} from 'react-redux';
+import cuid from 'cuid';
+import {reduxForm, Field} from 'redux-form';
 
 import {createEvent} from '../../../store/ac';
 
@@ -9,7 +11,7 @@ const AddEventForm = (props) => {
   const {history, createEvent, handlerCancelForm} = props;
 
   const initialState = {
-    id: Math.floor(Math.random() * (100500 - 1)) + 1,
+    id: cuid(),
     title: '',
     date: '',
     category: '',
@@ -59,49 +61,41 @@ const AddEventForm = (props) => {
 
   return (
     <Segment>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} autoComplete='off'>
+        <Field name='title' component='input' placeholder='Event title'/>
         <Form.Field>
-          <label>Название мероприятия</label>
-          <input
-            name='title'
-            placeholder='Имя'
-            value={state.title}
-            onChange={(e) => changeState(e)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Дата события</label>
+          <label>Event Date</label>
           <input
             name='date'
             type="date"
-            placeholder='Дата события'
+            placeholder='Enter event date'
             value={state.date}
             onChange={(e) => changeState(e)}
           />
         </Form.Field>
         <Form.Field>
-          <label>Город</label>
+          <label>City</label>
           <input
             name='city'
-            placeholder='Введите название города'
+            placeholder='Enter city name'
             value={state.city}
             onChange={(e) => changeState(e)}
           />
         </Form.Field>
         <Form.Field>
-          <label>Место проведения</label>
+          <label>Event venue</label>
           <input
             name='venue'
-            placeholder='Введите место проведения мероприятия'
+            placeholder='Enter venue'
             value={state.venue}
             onChange={(e) => changeState(e)}
           />
         </Form.Field>
         <Form.Field>
-          <label>Кем размещается</label>
+          <label>Hosted by</label>
           <input
             name='hostedBy'
-            placeholder='Введите Ваше имя'
+            placeholder='Enter name'
             value={state.hostedBy}
             onChange={(e) => changeState(e)}
           />
@@ -120,4 +114,4 @@ const AddEventForm = (props) => {
 export default connect(
   null,
   {createEvent})
-(AddEventForm);
+(reduxForm({form: 'eventForm'})(AddEventForm));

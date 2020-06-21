@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
-import {Button, Grid} from 'semantic-ui-react';
+import {Grid} from 'semantic-ui-react';
 
 import {EventList} from '../EventList/EventList';
-import AddEventForm from '../EventForm/AddEventForm';
 
 import {deleteEvent, updateEvent} from '../../../store/ac';
 
@@ -12,9 +11,6 @@ import {deleteEvent, updateEvent} from '../../../store/ac';
 const EventDashboard = (props) => {
 
   const {events, deleteEvent} = props;
-
-  const [isOpen, setIsOpen] = useState(false);
-
 
   return (
     <Grid>
@@ -25,13 +21,7 @@ const EventDashboard = (props) => {
         />
       </Grid.Column>
       <Grid.Column width={6}>
-        <Button onClick={()=> setIsOpen(true)} positive content='Add event'/>
-        { isOpen
-          &&
-          <AddEventForm
-            handlerCancelForm={() => setIsOpen(false)}
-          />
-        }
+        <h2>Activity Feed</h2>
       </Grid.Column>
     </Grid>
   )
