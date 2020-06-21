@@ -1,21 +1,32 @@
 import React, {useState} from 'react';
 import {Button, Form, Segment} from 'semantic-ui-react';
+import {connect} from 'react-redux';
+import {updateEvent} from '../../../store/ac';
 
-export const EventForm = ({handlerCancelForm, addEvent, handleDeleteEvent}) => {
+const EventForm = (props) => {
 
+  const {handlerCancelForm, addEvent, history, events, match, updateEvent} = props;
+  const event = match ? events.filter(e => match.params.id === e.id)[0] : {};
   const initialState = {
-    eventDate: '',
-    eventName: '',
-    city: '',
-    venue: '',
-    postedBy: ''
+    id: event.id || '',
+    date: event.date || '',
+    title: event.title || '',
+    city: event.city || '',
+    venue: event.venue || '',
+    hostedBy: event.hostedBy || ''
   };
   const [state, setState] = useState(initialState);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addEvent(state);
-    setState(initialState);
+    if (JSON.stringify(event).length > 2) {
+      console.log(state)
+      updateEvent(state);
+      history.push(`/events/${event.id}`);
+    } else if (JSON.stringify(event).length <= 2) {
+      addEvent(state);
+      setState(initialState);
+    }
   }
 
   const changeState = e => {
@@ -29,19 +40,19 @@ export const EventForm = ({handlerCancelForm, addEvent, handleDeleteEvent}) => {
           <Form.Field>
             <label>Название мероприятия</label>
             <input
-              name='eventName'
+              name='title'
               placeholder='Имя'
-              value={state.eventName}
+              value={state.title}
               onChange={(e) => changeState(e)}
             />
           </Form.Field>
           <Form.Field>
             <label>Дата события</label>
             <input
-              name='eventDate'
+              name='date'
               type="date"
               placeholder='Дата события'
-              value={state.eventDate}
+              value={state.date}
               onChange={(e) => changeState(e)}
             />
           </Form.Field>
@@ -66,17 +77,24 @@ export const EventForm = ({handlerCancelForm, addEvent, handleDeleteEvent}) => {
           <Form.Field>
             <label>Кем размещается</label>
             <input
-              name='postedBy'
+              name='hostedBy'
               placeholder='Введите Ваше имя'
-              value={state.postedBy}
+              value={state.hostedBy}
               onChange={(e) => changeState(e)}
             />
           </Form.Field>
           <Button positive type='submit'>
-            Отправить
+            {match ? `Edit` : `Add`}
           </Button>
-          <Button onClick={handlerCancelForm} type='button'>Отменить</Button>
+          <Button
+            onClick={
+              match
+                ? () => history.push(`/events/${event.id}`)
+                : handlerCancelForm} type='button'>Cancel
+          </Button>
         </Form>
       </Segment>
   )
-}
+};
+
+export default connect(state => ({events: state.events}), {updateEvent})(EventForm);

@@ -1,12 +1,13 @@
 import React from 'react';
 import {Button, Header, Image, Item, Segment} from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 
 
 export const EventDetailedHeader = (props) => {
 
-  const {date, hostedBy, category, title} = props;
+  const {date, hostedBy, category, title, id} = props;
 
-  const img = require(`../../../assets/categoryImages/${category}.jpg`);
+  const img = category ? require(`../../../assets/categoryImages/${category}.jpg`) : null;
 
   const eventImageStyle = {
     filter: 'brightness(30%)'
@@ -49,10 +50,12 @@ export const EventDetailedHeader = (props) => {
         <Button>Cancel My Place</Button>
         <Button color="teal">Join this event</Button>
 
-        <Button color="orange" floated="right">
+        <Button as={Link} to={`/manage/${id}`} color="orange" floated="right">
           Manage Event
         </Button>
       </Segment>
     </Segment.Group>
   );
-}
+};
+
+

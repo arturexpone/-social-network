@@ -22,6 +22,7 @@ const EventDetailsPage = (props) => {
             hostedBy={event.hostedBy}
             category={event.category}
             title={event.title}
+            id={match.params.id}
           />
           <EventDetailedInfo
             description={event.description}

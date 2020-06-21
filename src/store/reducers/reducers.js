@@ -56,8 +56,9 @@ export const eventReducer = (state = initialState, action) => {
   switch (action.type) {
     case Constance.CREATE_EVENT:
       return [...state, action.payload];
-    case Constance.UPDATE_EVENT:
-      return {...state};
+    case Constance.UPDATE_EVENT: {
+      return state.map(e => e.id === action.payload.id ? {...e, ...action.payload} : e);
+    }
     case Constance.DELETE_EVENT:
       return state.filter(e => e.id !== action.payload)
     default:

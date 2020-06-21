@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Button, Grid} from 'semantic-ui-react';
 
 import {EventList} from '../EventList/EventList';
-import {EventForm} from '../EventForm/EventForm';
+import EventForm from '../EventForm/EventForm';
 
 import logo from '../../../assets/images/logo.png';
 
@@ -19,13 +19,13 @@ const EventDashboard = (props) => {
   const addEvent = (event) => {
     const newEvent = {
       id: events[events.length - 1].id + 1,
-      title: event.eventName,
-      date: event.eventDate,
+      title: event.title,
+      date: event.date,
       category: '',
       description: '',
       city: event.city,
       venue: event.venue,
-      hostedBy: event.postedBy,
+      hostedBy: event.hostedBy,
       hostPhotoURL: logo,
       attendees: [
         {
@@ -41,6 +41,7 @@ const EventDashboard = (props) => {
       ]
     };
     createEvent(newEvent);
+    setIsOpen(false);
   };
 
   return (

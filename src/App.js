@@ -9,7 +9,7 @@ import EventDetailsPage from './features/event/EventDetailed/EventDetailedPage';
 import {PeopleDashboard} from './features/user/PeopleDashboard/PeopleDashboard';
 import {UserDetailedPage} from './features/user/UserDetailed/UserDetailedPage';
 import {SettingsDashboard} from './features/user/Settings/SettingsDashboard';
-import {EventForm} from './features/event/EventForm/EventForm';
+import EventForm from './features/event/EventForm/EventForm';
 
 
 
@@ -27,7 +27,7 @@ export const App = () => {
               <Route exact path='/people' component={PeopleDashboard}/>
               <Route exact path='/profile/:id' component={UserDetailedPage}/>
               <Route path='/settings' component={SettingsDashboard}/>
-              <Route exact path='/create-event' component={EventForm}/>
+              <Route exact path={['/create-event', '/manage/:id']} component={EventForm}/>
             </Switch>
           </Container>
         </>
