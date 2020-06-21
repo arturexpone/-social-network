@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Form, Segment} from 'semantic-ui-react';
+import {Button, Form, Grid, Header, Segment} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import cuid from 'cuid';
 import {reduxForm, Field} from 'redux-form';
@@ -10,31 +10,6 @@ import {TextInput} from '../../common/form/TextInput';
 const AddEventForm = (props) => {
 
   const {history, createEvent, handlerCancelForm} = props;
-
-  const initialState = {
-    id: cuid(),
-    title: '',
-    date: '',
-    category: '',
-    description: '',
-    city: '',
-    venue: '',
-    hostedBy: '',
-    hostPhotoURL: '',
-    attendees: [
-      {
-        id: Math.floor(Math.random() * (100500 - 1)) + 1,
-        name: '',
-        photoURL: ''
-      },
-      {
-        id: Math.floor(Math.random() * (100500 - 1)) + 1,
-        name: '',
-        photoURL: ''
-      }
-    ]
-  };
-  const [state, setState] = useState(initialState);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -48,10 +23,6 @@ const AddEventForm = (props) => {
     }
   }
 
-  const changeState = e => {
-    setState({...state, [e.target.name]: e.target.value});
-  }
-
   const goBack = () => {
     if (history && history.location.pathname === '/create-event') {
       history.goBack();
@@ -61,54 +32,31 @@ const AddEventForm = (props) => {
   }
 
   return (
-    <Segment>
-      <Form onSubmit={onSubmit} autoComplete='off'>
-        <Field name='title' component={TextInput} placeholder='Event title'/>
-        <Form.Field>
-          <label>Event Date</label>
-          <input
-            name='date'
-            type="date"
-            placeholder='Enter event date'
-            value={state.date}
-            onChange={(e) => changeState(e)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>City</label>
-          <input
-            name='city'
-            placeholder='Enter city name'
-            value={state.city}
-            onChange={(e) => changeState(e)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Event venue</label>
-          <input
-            name='venue'
-            placeholder='Enter venue'
-            value={state.venue}
-            onChange={(e) => changeState(e)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Hosted by</label>
-          <input
-            name='hostedBy'
-            placeholder='Enter name'
-            value={state.hostedBy}
-            onChange={(e) => changeState(e)}
-          />
-        </Form.Field>
-        <Button positive type='submit'>
-          Add
-        </Button>
-        <Button
-          onClick={goBack} type='button'>Cancel
-        </Button>
-      </Form>
-    </Segment>
+    <Grid>
+      <Grid.Column width={10}>
+        <Segment>
+
+          <Form onSubmit={onSubmit} autoComplete='off'>
+
+            <Header sub color='teal' content='Event Details' >Event Details</Header>
+            <Field name='title' component={TextInput} placeholder='Give your event a name'/>
+            <Field name='category' component={TextInput} placeholder='What is your event about?'/>
+            <Field name='description' component={TextInput} placeholder='Tell is about your event'/>
+
+            <Header sub color='teal' content='Event Location Details' >Event Location Details</Header>
+            <Field name='city' component={TextInput} placeholder='Event City'/>
+            <Field name='venue' component={TextInput} placeholder='Event Venue'/>
+            <Field name='date' component={TextInput} placeholder='Event Date'/>
+            <Button positive type='submit'>
+              Add
+            </Button>
+            <Button
+              onClick={goBack} type='button'>Cancel
+            </Button>
+          </Form>
+        </Segment>
+      </Grid.Column>
+    </Grid>
   );
 };
 
