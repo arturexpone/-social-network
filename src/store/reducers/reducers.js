@@ -57,6 +57,7 @@ export const eventReducer = (state = initialState, action) => {
     case Constance.CREATE_EVENT:
       return [...state, action.payload];
     case Constance.UPDATE_EVENT: {
+      console.log(action.payload)
       return state.map(e => e.id === action.payload.id ? {...e, ...action.payload} : e);
     }
     case Constance.DELETE_EVENT:

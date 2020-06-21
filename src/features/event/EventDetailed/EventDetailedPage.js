@@ -12,7 +12,7 @@ const EventDetailsPage = (props) => {
 
   const {events, match} = props;
 
-  const event = events.filter(e => match.params.id === e.id).pop();
+  const event = events.filter(e => match.params.id === e.id)[0] || {};
 
   return (
       <Grid>
