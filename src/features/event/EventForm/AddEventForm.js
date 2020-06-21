@@ -5,6 +5,7 @@ import cuid from 'cuid';
 import {reduxForm, Field} from 'redux-form';
 
 import {createEvent} from '../../../store/ac';
+import {TextInput} from '../../common/form/TextInput';
 
 const AddEventForm = (props) => {
 
@@ -62,7 +63,7 @@ const AddEventForm = (props) => {
   return (
     <Segment>
       <Form onSubmit={onSubmit} autoComplete='off'>
-        <Field name='title' component='input' placeholder='Event title'/>
+        <Field name='title' component={TextInput} placeholder='Event title'/>
         <Form.Field>
           <label>Event Date</label>
           <input
