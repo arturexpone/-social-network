@@ -6,8 +6,6 @@ export const EventDetailedInfo = (props) => {
 
   const {description, date, venue, venueLatLng} = props;
 
-  console.log(props)
-
   const [isMapOpen, setIsMapOpen] = useState(false);
 
   return (

@@ -62,7 +62,6 @@ export const eventReducer = (state = initialState, action) => {
     case Constance.CREATE_EVENT:
       return [...state, action.payload];
     case Constance.UPDATE_EVENT: {
-      console.log(action.payload)
       return state.map(e => e.id === action.payload.id ? {...e, ...action.payload} : e);
     }
     case Constance.DELETE_EVENT:
@@ -70,4 +69,16 @@ export const eventReducer = (state = initialState, action) => {
     default:
       return state
   }
-}
+};
+
+export const modalReducer = (state = null, action) => {
+  switch (action.type) {
+    case Constance.MODAL_OPEN:
+      return true;
+    case Constance.MODAL_CLOSE: {
+      return null;
+    }
+    default:
+      return state
+  }
+};
