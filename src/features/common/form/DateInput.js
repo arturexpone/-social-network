@@ -16,10 +16,10 @@ export const DateInput = (props) => {
     <Form.Field error={touched && !!error}>
       <DatePicker
         {...rest}
-        placeholder={placeholder}
         selected={input.value ? new Date(input.value) : null}
         onChange={input.onChange}
         onBlur={input.onBlur}
+        placeholder='Event date'
         onChangeRaw={e => e.preventDefault()}
       />
       {touched && error && <Label basic color='red'>{error}</Label>}
