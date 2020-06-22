@@ -3,7 +3,7 @@ import {Button, Menu} from 'semantic-ui-react';
 
 export const SignedOutMenu = (props) => {
 
-  const {signOut} = props;
+  const {signOut, handleRegister} = props;
 
   return (
     <Menu.Item position='right'>
@@ -13,7 +13,13 @@ export const SignedOutMenu = (props) => {
         content='Login'
         onClick={signOut}
       />
-      <Button basic inverted content='Register' style={{marginLeft: '0.5em'}}/>
+      <Button
+        onClick={handleRegister}
+        basic
+        inverted
+        content='Register'
+        style={{marginLeft: '0.5em'}}
+      />
     </Menu.Item>
   );
 }

@@ -74,7 +74,7 @@ export const eventReducer = (state = initialState, action) => {
 export const modalReducer = (state = null, action) => {
   switch (action.type) {
     case Constance.MODAL_OPEN:
-      return true;
+      return {...action.payload};
     case Constance.MODAL_CLOSE: {
       return null;
     }

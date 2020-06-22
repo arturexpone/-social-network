@@ -10,12 +10,14 @@ import {PeopleDashboard} from './features/user/PeopleDashboard/PeopleDashboard';
 import {UserDetailedPage} from './features/user/UserDetailed/UserDetailedPage';
 import {SettingsDashboard} from './features/user/Settings/SettingsDashboard';
 import AddEventForm from './features/event/EventForm/EventForm';
+import ModalManager from './features/modals/ModalManager';
 
 
 
 export const App = () => {
   return (
     <>
+      <ModalManager />
       <Route exact path='/' component={HomePage}/>
       <Route path='/(.+)' render={() => (
         <>
