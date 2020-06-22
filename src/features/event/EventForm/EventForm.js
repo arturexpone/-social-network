@@ -4,14 +4,18 @@ import {connect} from 'react-redux';
 import cuid from 'cuid';
 import {reduxForm, Field} from 'redux-form';
 
-import {createEvent} from '../../../store/ac';
+import {createEvent, updateEvent} from '../../../store/ac';
 import {TextInput} from '../../common/form/TextInput';
 import {TextArea} from '../../common/form/TextArea';
 import {SelectInput} from '../../common/form/SelectInput';
 
-const AddEventForm = (props) => {
+const EventForm = (props) => {
 
-  const {history, createEvent, handlerCancelForm} = props;
+  const {
+    history, createEvent,
+    handlerCancelForm, handleSubmit,
+    initialValues, updateEvent,
+        } = props;
 
   const category = [
     {key: 'drinks', text: 'Drinks', value: 'drinks'},
@@ -22,21 +26,26 @@ const AddEventForm = (props) => {
     {key: 'travel', text: 'Travel', value: 'travel'},
   ];
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (!history) {
-      handlerCancelForm();
-    } else if (history && history.location.pathname === '/create-event') {
-      goBack();
+  const onSubmit = values => {
+    if (initialValues.id) {
+      updateEvent(values);
+      history.goBack();
+    } else {
+      console.log(values)
+      const newEvent = {
+        ...values,
+        id: cuid(),
+        hostPhotoURL: 'https://cache.desktopnexus.com/thumbseg/2076/2076205-thumbnail.jpg',
+        hostedBy: 'Anonym',
+        attendees: []
+      };
+      createEvent(newEvent);
+      history.goBack();
     }
   }
 
   const goBack = () => {
-    if (history && history.location.pathname === '/create-event') {
       history.goBack();
-    } else if (!history) {
-      handlerCancelForm();
-    }
   }
 
   return (
@@ -44,9 +53,8 @@ const AddEventForm = (props) => {
       <Grid.Column width={10}>
         <Segment>
 
-          <Form onSubmit={onSubmit} autoComplete='off'>
-
-            <Header sub color='teal' content='Event Details' >Event Details</Header>
+          <Header sub color='teal' children='Event Details'></Header>
+          <Form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
             <Field name='title' component={TextInput} placeholder='Give your event a name'/>
             <Field
               name='category'
@@ -61,12 +69,12 @@ const AddEventForm = (props) => {
               placeholder='Tell is about your event'
             />
 
-            <Header sub color='teal' content='Event Location Details' >Event Location Details</Header>
+            <Header sub color='teal' content='Event Location Details' ></Header>
             <Field name='city' component={TextInput} placeholder='Event City'/>
             <Field name='venue' component={TextInput} placeholder='Event Venue'/>
             <Field name='date' component={TextInput} placeholder='Event Date'/>
             <Button positive type='submit'>
-              Add
+              {initialValues.id ? 'Edit' : 'Add'}
             </Button>
             <Button
               onClick={goBack} type='button'>Cancel
@@ -78,7 +86,19 @@ const AddEventForm = (props) => {
   );
 };
 
+const mapStateToProps = (state, ownProps) => {
+  const eventId = ownProps.match.params.id;
+  let event = {};
+  if (eventId && state.events.length > 0) {
+    event = state.events.filter(e => eventId === e.id)[0];
+  }
+
+  return {
+    initialValues: event
+  }
+};
+
 export default connect(
-  null,
-  {createEvent})
-(reduxForm({form: 'eventForm'})(AddEventForm));
+  mapStateToProps,
+  {createEvent, updateEvent})
+(reduxForm({form: 'eventForm'})(EventForm));
