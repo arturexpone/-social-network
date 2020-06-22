@@ -1,8 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, Form, Grid, Header, Segment} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import cuid from 'cuid';
 import {reduxForm, Field} from 'redux-form';
+import {
+  composeValidators,
+  combineValidators,
+  isRequired,
+  hasLengthGreaterThan
+} from 'revalidate';
 
 import {createEvent, updateEvent} from '../../../store/ac';
 import {TextInput} from '../../common/form/TextInput';
@@ -15,7 +21,8 @@ const EventForm = (props) => {
     history, createEvent,
     handlerCancelForm, handleSubmit,
     initialValues, updateEvent,
-        } = props;
+    invalid, submitting, pristine
+  } = props;
 
   const category = [
     {key: 'drinks', text: 'Drinks', value: 'drinks'},
@@ -42,11 +49,11 @@ const EventForm = (props) => {
       createEvent(newEvent);
       history.goBack();
     }
-  }
+  };
 
   const goBack = () => {
-      history.goBack();
-  }
+    history.goBack();
+  };
 
   return (
     <Grid>
@@ -69,11 +76,11 @@ const EventForm = (props) => {
               placeholder='Tell is about your event'
             />
 
-            <Header sub color='teal' content='Event Location Details' ></Header>
+            <Header sub color='teal' content='Event Location Details'></Header>
             <Field name='city' component={TextInput} placeholder='Event City'/>
             <Field name='venue' component={TextInput} placeholder='Event Venue'/>
             <Field name='date' component={TextInput} placeholder='Event Date'/>
-            <Button positive type='submit'>
+            <Button positive type='submit' disabled={invalid || submitting || pristine}>
               {initialValues.id ? 'Edit' : 'Add'}
             </Button>
             <Button
@@ -85,6 +92,16 @@ const EventForm = (props) => {
     </Grid>
   );
 };
+
+const validate = combineValidators({
+  title: isRequired({message: 'The event title is required'}),
+  category: isRequired({message: 'The category is required'}),
+  description: composeValidators(
+    isRequired({message: 'Please enter a description'}),
+    hasLengthGreaterThan(4)({message: 'Description needs to be at least 5 characters'}))(),
+  city: isRequired('city'),
+  venue: isRequired('venue'),
+});
 
 const mapStateToProps = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
@@ -101,4 +118,4 @@ const mapStateToProps = (state, ownProps) => {
 export default connect(
   mapStateToProps,
   {createEvent, updateEvent})
-(reduxForm({form: 'eventForm'})(EventForm));
+(reduxForm({form: 'eventForm', validate})(EventForm));
