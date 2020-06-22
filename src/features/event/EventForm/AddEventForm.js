@@ -6,6 +6,7 @@ import {reduxForm, Field} from 'redux-form';
 
 import {createEvent} from '../../../store/ac';
 import {TextInput} from '../../common/form/TextInput';
+import {TextArea} from '../../common/form/TextArea';
 
 const AddEventForm = (props) => {
 
@@ -13,9 +14,6 @@ const AddEventForm = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(state)
-    createEvent(state);
-    setState(initialState);
     if (!history) {
       handlerCancelForm();
     } else if (history && history.location.pathname === '/create-event') {
@@ -41,7 +39,12 @@ const AddEventForm = (props) => {
             <Header sub color='teal' content='Event Details' >Event Details</Header>
             <Field name='title' component={TextInput} placeholder='Give your event a name'/>
             <Field name='category' component={TextInput} placeholder='What is your event about?'/>
-            <Field name='description' component={TextInput} placeholder='Tell is about your event'/>
+            <Field
+              name='description'
+              component={TextArea}
+              rows={3}
+              placeholder='Tell is about your event'
+            />
 
             <Header sub color='teal' content='Event Location Details' >Event Location Details</Header>
             <Field name='city' component={TextInput} placeholder='Event City'/>
