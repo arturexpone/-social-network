@@ -7,10 +7,20 @@ import {reduxForm, Field} from 'redux-form';
 import {createEvent} from '../../../store/ac';
 import {TextInput} from '../../common/form/TextInput';
 import {TextArea} from '../../common/form/TextArea';
+import {SelectInput} from '../../common/form/SelectInput';
 
 const AddEventForm = (props) => {
 
   const {history, createEvent, handlerCancelForm} = props;
+
+  const category = [
+    {key: 'drinks', text: 'Drinks', value: 'drinks'},
+    {key: 'culture', text: 'Culture', value: 'culture'},
+    {key: 'film', text: 'Film', value: 'film'},
+    {key: 'food', text: 'Food', value: 'food'},
+    {key: 'music', text: 'Music', value: 'music'},
+    {key: 'travel', text: 'Travel', value: 'travel'},
+  ];
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +48,12 @@ const AddEventForm = (props) => {
 
             <Header sub color='teal' content='Event Details' >Event Details</Header>
             <Field name='title' component={TextInput} placeholder='Give your event a name'/>
-            <Field name='category' component={TextInput} placeholder='What is your event about?'/>
+            <Field
+              name='category'
+              component={SelectInput}
+              placeholder='What is your event about?'
+              options={category}
+            />
             <Field
               name='description'
               component={TextArea}
