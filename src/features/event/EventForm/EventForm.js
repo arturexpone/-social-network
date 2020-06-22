@@ -14,6 +14,7 @@ import {createEvent, updateEvent} from '../../../store/ac';
 import {TextInput} from '../../common/form/TextInput';
 import {TextArea} from '../../common/form/TextArea';
 import {SelectInput} from '../../common/form/SelectInput';
+import {DateInput} from '../../common/form/DateInput';
 
 const EventForm = (props) => {
 
@@ -79,7 +80,14 @@ const EventForm = (props) => {
             <Header sub color='teal' content='Event Location Details'></Header>
             <Field name='city' component={TextInput} placeholder='Event City'/>
             <Field name='venue' component={TextInput} placeholder='Event Venue'/>
-            <Field name='date' component={TextInput} placeholder='Event Date'/>
+            <Field
+              name='date'
+              component={DateInput}
+              placeholder='Event Date'
+              dateFormat='dd LLL yyyy h:mm a'
+              showTimeSelect
+              timeFormat='HH:mm'
+            />
             <Button positive type='submit' disabled={invalid || submitting || pristine}>
               {initialValues.id ? 'Edit' : 'Add'}
             </Button>
@@ -101,6 +109,7 @@ const validate = combineValidators({
     hasLengthGreaterThan(4)({message: 'Description needs to be at least 5 characters'}))(),
   city: isRequired('city'),
   venue: isRequired('venue'),
+  date: isRequired('date')
 });
 
 const mapStateToProps = (state, ownProps) => {
