@@ -25,9 +25,7 @@ const EventDetailsPage = (props) => {
             id={match.params.id}
           />
           <EventDetailedInfo
-            description={event.description}
-            date={event.date}
-            venue={event.venue}
+            {...event}
           />
           <EventDetailedChat />
         </Grid.Column>

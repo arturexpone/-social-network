@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Grid, Icon, Segment} from 'semantic-ui-react';
+import {EventDetailedMap} from './EventDetailedMaps';
 
 export const EventDetailedInfo = (props) => {
 
-  const {description, date, venue} = props;
+  const {description, date, venue, venueLatLng} = props;
+
+  console.log(props)
+
+  const [isMapOpen, setIsMapOpen] = useState(false);
 
   return (
     <Segment.Group>
@@ -36,10 +41,15 @@ export const EventDetailedInfo = (props) => {
             <span>{venue}</span>
           </Grid.Column>
           <Grid.Column width={4}>
-            <Button color="teal" size="tiny" content="Show Map" />
+            <Button
+              onClick={() => setIsMapOpen(!isMapOpen)}
+              color="teal"
+              size="tiny"
+              content={isMapOpen ? ` Hide Map` : 'Show Map'} />
           </Grid.Column>
         </Grid>
       </Segment>
+      {isMapOpen ? <EventDetailedMap lat={venueLatLng.lat} lng={venueLatLng.lng} /> : null}
     </Segment.Group>
   );
 }
