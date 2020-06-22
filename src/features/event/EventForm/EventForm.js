@@ -15,6 +15,7 @@ import {TextInput} from '../../common/form/TextInput';
 import {TextArea} from '../../common/form/TextArea';
 import {SelectInput} from '../../common/form/SelectInput';
 import {DateInput} from '../../common/form/DateInput';
+import {PlaceInput} from '../../common/form/PlaceInput';
 
 const EventForm = (props) => {
 
@@ -78,7 +79,7 @@ const EventForm = (props) => {
             />
 
             <Header sub color='teal' content='Event Location Details'></Header>
-            <Field name='city' component={TextInput} placeholder='Event City'/>
+            <Field name='city' component={PlaceInput} placeholder='Event City'/>
             <Field name='venue' component={TextInput} placeholder='Event Venue'/>
             <Field
               name='date'
