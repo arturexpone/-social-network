@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, Container, Menu} from 'semantic-ui-react';
 import {withRouter} from 'react-router';
 import {compose} from 'redux';
@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import {Link, NavLink} from 'react-router-dom';
 import {SignedOutMenu} from '../Menus/SignedOutMenu';
 import {SignedInMenu} from '../Menus/SignedInMenu';
-import {openModal} from '../../../store/ac';
+import {logout, openModal} from '../../../store/ac';
 
 import logo from '../../../assets/images/logo.png';
 
@@ -15,12 +15,8 @@ import logo from '../../../assets/images/logo.png';
 
 const NavBar = (props) => {
 
-  const {history, openModal} = props;
+  const {history, openModal, auth, logout} = props;
 
-  const initialState = {
-    isAuthenticated: false,
-  };
-  const [state, setState] = useState(initialState);
 
   const handleSignIn = () => {
     openModal('LoginModal');
@@ -31,7 +27,7 @@ const NavBar = (props) => {
   };
 
   const handleSignOut = () => {
-    setState({...state, isAuthenticated: false});
+    logout();
     history.push('/');
   };
 
@@ -54,8 +50,8 @@ const NavBar = (props) => {
             content='Add post'
           />
         </Menu.Item>
-        {state.isAuthenticated
-          ? <SignedInMenu signIn={handleSignOut}/>
+        {auth.authenticated
+          ? <SignedInMenu signIn={handleSignOut} currentUser={auth.currentUser}/>
           : <SignedOutMenu handleRegister={handleRegister} signOut={handleSignIn}/>
         }
       </Container>
@@ -63,7 +59,11 @@ const NavBar = (props) => {
   )
 };
 
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
 export default compose(
   withRouter,
-  connect(null, {openModal})
+  connect(mapStateToProps, {openModal, logout})
 )(NavBar);

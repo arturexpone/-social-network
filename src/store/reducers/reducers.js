@@ -58,7 +58,7 @@ const eventReducerInitialState = [
 ];
 const authInitialState = {
   authenticated: false,
-  currentUser: null
+  currentUser: 'vasya'
 };
 
 export const eventReducer = (state = eventReducerInitialState, action) => {

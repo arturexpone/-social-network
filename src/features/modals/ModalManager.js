@@ -17,7 +17,7 @@ const ModalManager = ({currentModal}) => {
     const ModalComponent = modalLookup[modalType];
 
     renderedModal = <ModalComponent {...modalProps}/>
-  }
+  };
 
   return (
   <span>
@@ -30,4 +30,4 @@ const mapState = state => ({
   currentModal: state.modals
 })
 
-export default connect(mapState)(ModalManager)
+export default connect(mapState)(ModalManager);
