@@ -1,5 +1,5 @@
 import {combineReducers, createStore} from 'redux';
-import {eventReducer, authReducer, modalReducer} from './reducers/reducers';
+import {eventReducer, authReducer, modalReducer} from './reducers';
 import {devToolsEnhancer} from 'redux-devtools-extension';
 import {reducer as FormReducer} from 'redux-form';
 
