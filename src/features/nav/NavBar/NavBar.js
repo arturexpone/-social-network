@@ -39,17 +39,21 @@ const NavBar = (props) => {
           Social Network
         </Menu.Item>
         <Menu.Item as={NavLink} exact to='/events' name='Events' />
-        <Menu.Item as={NavLink} to='/people' name='People' />
-        <Menu.Item>
-          <Button
-            as={Link}
-            to='/create-event'
-            floated='right'
-            positive
-            inverted
-            content='Add post'
-          />
-        </Menu.Item>
+        {auth.authenticated &&
+        <>
+          <Menu.Item as={NavLink} to='/people' name='People' />
+          <Menu.Item>
+            <Button
+              as={Link}
+              to='/create-event'
+              floated='right'
+              positive
+              inverted
+              content='Add post'
+            />
+          </Menu.Item>
+        </>
+        }
         {auth.authenticated
           ? <SignedInMenu signIn={handleSignOut} currentUser={auth.currentUser}/>
           : <SignedOutMenu handleRegister={handleRegister} signOut={handleSignIn}/>

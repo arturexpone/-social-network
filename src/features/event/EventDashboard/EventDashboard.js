@@ -3,14 +3,17 @@ import {connect} from 'react-redux';
 import {Grid} from 'semantic-ui-react';
 
 import {EventList} from '../EventList/EventList';
+import {LoadingComponent} from '../../common/LoadingComponent/LoadingComponent';
 
 import {deleteEvent, updateEvent} from '../../../store/ac';
 
-
-
 const EventDashboard = (props) => {
 
-  const {events, deleteEvent} = props;
+  const {events, deleteEvent, loading} = props;
+
+  if (loading) {
+    return <LoadingComponent />
+  }
 
   return (
     <Grid>
@@ -28,7 +31,8 @@ const EventDashboard = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  events: state.events
+  events: state.events,
+  loading: false
 });
 
 export default connect(mapStateToProps,
