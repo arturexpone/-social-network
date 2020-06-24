@@ -12,7 +12,6 @@ import {logout, openModal} from '../../../store/ac';
 import logo from '../../../assets/images/logo.png';
 
 
-
 const NavBar = (props) => {
 
   const {history, openModal, auth, logout} = props;

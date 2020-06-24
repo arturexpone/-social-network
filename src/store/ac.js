@@ -1,9 +1,13 @@
 import {Constance} from './constance';
+import {toastr} from 'react-redux-toastr';
 
 
 // Events ac
 export const createEvent = (payload) => ({type: Constance.CREATE_EVENT, payload});
-export const updateEvent = (payload) => ({type: Constance.UPDATE_EVENT, payload});
+export const updateEvent = (payload) => {
+  toastr.success('Success!', 'Event has been updated!');
+  return {type: Constance.UPDATE_EVENT, payload}
+};
 export const deleteEvent = (payload) => ({type: Constance.DELETE_EVENT, payload});
 
 
