@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Header, Image, Item, Segment} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
-import {format, parseISO} from 'date-fns';
+import {format} from 'date-fns';
 
 
 export const EventDetailedHeader = (props) => {
@@ -37,7 +37,7 @@ export const EventDetailedHeader = (props) => {
                   content={title}
                   style={{ color: 'white' }}
                 />
-                <p>{format(parseISO(date),'EEEE do LLLL')}</p>
+                <p>{format(date.toDate(),'EEEE do LLLL')}</p>
                 <p>
                   Hosted by <strong>{hostedBy}</strong>
                 </p>
