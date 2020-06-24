@@ -1,8 +1,9 @@
 import React from 'react';
-
 import {Button, Icon, Item, List, Segment} from 'semantic-ui-react';
-import {EventListAttendee} from './EventListAttendee';
 import {Link} from 'react-router-dom';
+import {format, parseISO} from 'date-fns';
+
+import {EventListAttendee} from './EventListAttendee';
 
 export const EventListItem = (props) => {
 
@@ -27,7 +28,11 @@ export const EventListItem = (props) => {
       </Segment>
       <Segment>
           <span>
-            <Icon name='clock' /> {event.date}
+
+            <Icon name='clock' /> {format(parseISO(event.date), 'EEEE do LLL')}
+            at {' '}
+            {format(parseISO(event.date), 'h:mm a')}
+
             <Icon name='marker' /> {event.venue}
           </span>
       </Segment>
