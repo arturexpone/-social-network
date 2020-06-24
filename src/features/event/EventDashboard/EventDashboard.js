@@ -3,9 +3,11 @@ import {connect} from 'react-redux';
 import {Grid} from 'semantic-ui-react';
 
 import {EventList} from '../EventList/EventList';
+import {EventActivity} from '../EventActivity/EventActivity';
 import {LoadingComponent} from '../../common/LoadingComponent/LoadingComponent';
 
 import {deleteEvent, updateEvent} from '../../../store/ac';
+
 
 const EventDashboard = (props) => {
 
@@ -24,7 +26,7 @@ const EventDashboard = (props) => {
         />
       </Grid.Column>
       <Grid.Column width={6}>
-        <h2>Activity Feed</h2>
+        <EventActivity />
       </Grid.Column>
     </Grid>
   )
