@@ -1,6 +1,6 @@
 import {Constance} from '../constance';
 
-const initialState = [
+const eventReducerInitialState = [
   {
     id: '1',
     title: 'Trip to Empire State building',
@@ -56,8 +56,12 @@ const initialState = [
     ]
   }
 ];
+const authInitialState = {
+  authenticated: false,
+  currentUser: null
+};
 
-export const eventReducer = (state = initialState, action) => {
+export const eventReducer = (state = eventReducerInitialState, action) => {
   switch (action.type) {
     case Constance.CREATE_EVENT:
       return [...state, action.payload];
@@ -77,6 +81,24 @@ export const modalReducer = (state = null, action) => {
       return {...action.payload};
     case Constance.MODAL_CLOSE: {
       return null;
+    }
+    default:
+      return state
+  }
+};
+
+export const authReducer = (state = authInitialState, action) => {
+  switch (action.type) {
+    case Constance.LOGIN_USER:
+      return {
+        authenticated: true,
+        currentUser: action.payload.creds.email
+      };
+    case Constance.SIGN_OUT_USER: {
+      return {
+        authenticated: false,
+        currentUser: null
+      }
     }
     default:
       return state
