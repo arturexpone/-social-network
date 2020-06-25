@@ -5,15 +5,15 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 
 import {TextInput} from '../../common/form/TextInput';
-import {login} from '../../../store/ac';
+import {auth} from '../../../store/ac';
 
 
 const LoginForm = (props) => {
 
-  const {login, handleSubmit, error} = props;
+  const {auth, handleSubmit, error} = props;
 
   return (
-    <Form size='large' onSubmit={handleSubmit(login)} autoComplete='off'>
+    <Form size='large' onSubmit={handleSubmit(auth)} autoComplete='off'>
       <Segment>
         <Field
           name='email'
@@ -37,6 +37,6 @@ const LoginForm = (props) => {
 };
 
 export default compose(
-  connect(null, {login}),
+  connect(null, {auth}),
   reduxForm({form: 'LoginForm'}),
 )(LoginForm);

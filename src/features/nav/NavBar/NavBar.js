@@ -10,11 +10,12 @@ import {SignedInMenu} from '../Menus/SignedInMenu';
 import {logout, openModal} from '../../../store/ac';
 
 import logo from '../../../assets/images/logo.png';
+import {withFirebase} from 'react-redux-firebase';
 
 
 const NavBar = (props) => {
 
-  const {history, openModal, auth, logout} = props;
+  const {history, openModal, auth, firebase: {logout}} = props;
 
 
   const handleSignIn = () => {
@@ -38,7 +39,7 @@ const NavBar = (props) => {
           Social Network
         </Menu.Item>
         <Menu.Item as={NavLink} exact to='/events' name='Events' />
-        {auth.authenticated &&
+        {auth.uid && !auth.authError && auth.isLoaded &&
         <>
           <Menu.Item as={NavLink} to='/people' name='People' />
           <Menu.Item>
@@ -53,8 +54,8 @@ const NavBar = (props) => {
           </Menu.Item>
         </>
         }
-        {auth.authenticated
-          ? <SignedInMenu signIn={handleSignOut} currentUser={auth.currentUser}/>
+        {auth.uid && !auth.authError && auth.isLoaded
+          ? <SignedInMenu signIn={handleSignOut} currentUser={auth.email}/>
           : <SignedOutMenu handleRegister={handleRegister} signOut={handleSignIn}/>
         }
       </Container>
@@ -63,10 +64,11 @@ const NavBar = (props) => {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.firebase.auth
 });
 
 export default compose(
+  withFirebase,
   withRouter,
   connect(mapStateToProps, {openModal, logout})
 )(NavBar);

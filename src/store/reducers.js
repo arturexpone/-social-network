@@ -92,7 +92,7 @@ export const authReducer = (state = authInitialState, action) => {
     case Constance.LOGIN_USER:
       return {
         authenticated: true,
-        currentUser: action.payload.creds.email
+        currentUser: action.payload.email
       };
     case Constance.SIGN_OUT_USER: {
       return {

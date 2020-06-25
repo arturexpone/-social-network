@@ -23,10 +23,18 @@ export const openModal = (modalType, modalProps) => ({
 export const closeModal = () => ({type: Constance.MODAL_CLOSE});
 
 // Auth ac
-export const login = creds => async (dispatch, getState, {getFirebase}) => {
+const login = email => ({
+  type: Constance.LOGIN_USER,
+  payload: {
+    email
+  }
+});
+export const auth = creds => async (dispatch, getState, {getFirebase}) => {
   const firebase = getFirebase();
   try {
+    console.log(creds)
     await firebase.auth().signInWithEmailAndPassword(creds.email,creds.password);
+    dispatch(login(creds.email));
     dispatch(closeModal());
   } catch (error) {
     throw new SubmissionError({_error: error.message})
