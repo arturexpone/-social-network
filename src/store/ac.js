@@ -1,5 +1,8 @@
 import {Constance} from './constance';
 import {toastr} from 'react-redux-toastr';
+import 'firebase/auth';
+import * as firebase from 'firebase';
+import {firebaseConnect, getFirebase} from 'react-redux-firebase';
 
 
 // Events ac
@@ -21,9 +24,14 @@ export const openModal = (modalType, modalProps) => ({
 export const closeModal = () => ({type: Constance.MODAL_CLOSE});
 
 // Auth ac
-export const login = (creds) => ({
-  type: Constance.LOGIN_USER,
-  payload: {
-    creds
-  }});
+export const login = creds => async (dispatch, getState, {getFirebase}) => {
+  const firebase = getFirebase();
+  try {
+    await firebase.auth().signInWithEmailAndPassword(creds.email,creds.password);
+    dispatch(closeModal());
+  } catch (e) {
+    console.log(e)
+  }
+
+};
 export const logout = () => ({type: Constance.SIGN_OUT_USER});

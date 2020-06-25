@@ -3,18 +3,24 @@ import {Form, Segment, Button} from 'semantic-ui-react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
+import {firebaseConnect} from 'react-redux-firebase';
 
 import {TextInput} from '../../common/form/TextInput';
 import {login} from '../../../store/ac';
 
 
 
+
 const LoginForm = (props) => {
 
-  const {login, handleSubmit} = props;
+  const {login, handleSubmit, firebase} = props;
+
+  const onSubmit = auth => {
+    login(auth);
+  };
 
   return (
-    <Form error size='large' onSubmit={handleSubmit(login)} autoComplete='off'>
+    <Form error size='large' onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
       <Segment>
         <Field
           name='email'
@@ -37,6 +43,7 @@ const LoginForm = (props) => {
 };
 
 export default compose(
+  firebaseConnect(),
   connect(null, {login}),
   reduxForm({form: 'LoginForm'}),
 )(LoginForm);
