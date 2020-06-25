@@ -45,6 +45,11 @@ export const logout = () => ({type: Constance.SIGN_OUT_USER});
 //Register ac
 export const registerUser = user => async (dispatch, getState, {getFirebase}) => {
   const firebase = getFirebase();
-  await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
-  dispatch(closeModal());
+  try {
+    await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
+    dispatch(closeModal());
+  } catch (error) {
+      throw new SubmissionError({_error: error.message})
+  }
+
 };

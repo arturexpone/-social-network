@@ -27,7 +27,7 @@ const LoginForm = (props) => {
           type='password'
           placeholder='password'
         />
-        {error && <Label basic color='red'>{error}</Label>}
+        {error && <Label style={{marginBottom: '15px'}} basic color='red'>{error}</Label>}
         <Button fluid size='large' color='teal'>
           Login
         </Button>
