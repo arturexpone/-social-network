@@ -1,11 +1,12 @@
 import React from 'react';
-import {Form, Segment, Button, Label} from 'semantic-ui-react';
+import {Form, Segment, Button, Label, Divider} from 'semantic-ui-react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 
 import {TextInput} from '../../common/form/TextInput';
 import {auth} from '../../../store/ac';
+import {SocialLogin} from '../SocialLogin/SocialLogin';
 
 
 const LoginForm = (props) => {
@@ -31,6 +32,10 @@ const LoginForm = (props) => {
         <Button fluid size='large' color='teal'>
           Login
         </Button>
+        <Divider horizontal>
+          Or
+        </Divider>
+        <SocialLogin />
       </Segment>
     </Form>
   );

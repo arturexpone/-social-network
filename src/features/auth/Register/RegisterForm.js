@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Segment, Button, Label} from 'semantic-ui-react';
+import {Form, Segment, Button, Label, Divider} from 'semantic-ui-react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
@@ -7,6 +7,7 @@ import {combineValidators, isRequired} from 'revalidate';
 
 import {TextInput} from '../../common/form/TextInput';
 import {registerUser} from '../../../store/ac';
+import {SocialLogin} from '../SocialLogin/SocialLogin';
 
 
 const RegisterForm = (props) => {
@@ -39,6 +40,10 @@ const RegisterForm = (props) => {
           <Button fluid size='large' color='teal' disabled={invalid || submitting}>
             Register
           </Button>
+          <Divider horizontal>
+            Or
+          </Divider>
+          <SocialLogin />
         </Segment>
       </Form>
     </div>
