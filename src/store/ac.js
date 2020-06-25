@@ -1,8 +1,7 @@
 import {Constance} from './constance';
 import {toastr} from 'react-redux-toastr';
 import 'firebase/auth';
-import * as firebase from 'firebase';
-import {firebaseConnect, getFirebase} from 'react-redux-firebase';
+import {SubmissionError} from 'redux-form';
 
 
 // Events ac
@@ -29,8 +28,8 @@ export const login = creds => async (dispatch, getState, {getFirebase}) => {
   try {
     await firebase.auth().signInWithEmailAndPassword(creds.email,creds.password);
     dispatch(closeModal());
-  } catch (e) {
-    console.log(e)
+  } catch (error) {
+    throw new SubmissionError({_error: error.message})
   }
 
 };
