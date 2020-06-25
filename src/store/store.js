@@ -4,7 +4,7 @@ import {devToolsEnhancer} from 'redux-devtools-extension';
 import {reducer as FormReducer} from 'redux-form';
 import {reducer as ToastrReducer} from 'react-redux-toastr';
 import {firebaseReducer, getFirebase} from 'react-redux-firebase';
-import {createFirestoreInstance, firestoreReducer} from 'redux-firestore';
+import {createFirestoreInstance, firestoreReducer, getFirestore} from 'redux-firestore';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/database';
@@ -42,7 +42,7 @@ const reducers = combineReducers({
   firestore: firestoreReducer,
 });
 
-export const store = createStore(reducers, compose(applyMiddleware(thunk.withExtraArgument({getFirebase})), devToolsEnhancer()));
+export const store = createStore(reducers, compose(applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})), devToolsEnhancer()));
 
 export const rrfProps = {
   firebase,
