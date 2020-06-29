@@ -1,0 +1,64 @@
+{
+  "name": "revents",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "cuid": "*",
+    "date-fns": "*",
+    "firebase": "*",
+    "google-map-react": "^1.1.7",
+    "google-maps-react": "^2.0.6",
+    "moment": "*",
+    "react": "^16.8.6",
+    "react-cropper": "*",
+    "react-datepicker": "*",
+    "react-dom": "*",
+    "react-dropzone": "*",
+    "react-google-places-autocomplete": "^2.0.7",
+    "react-infinite-scroller": "*",
+    "react-lazyload": "*",
+    "react-places-autocomplete": "^7.2.1",
+    "react-redux": "*",
+    "react-redux-firebase": "*",
+    "react-redux-toastr": "*",
+    "react-router-dom": "*",
+    "react-scripts": "*",
+    "redux": "*",
+    "redux-auth-wrapper": "*",
+    "redux-firestore": "*",
+    "redux-form": "*",
+    "redux-thunk": "*",
+    "revalidate": "*",
+    "semantic-ui-react": "*"
+  },
+  "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && firebase deploy"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-redux-toastr": "^7.4.1",
+    "@types/react-router-dom": "^4.3.3",
+    "redux-devtools-extension": "^2.13.8",
+    "source-map-explorer": "^1.5.0",
+    "typescript": "^3.3"
+  }
+}
