@@ -2,9 +2,11 @@
 
 # dependencies
 .idea
+.vscode
 /node_modules
 /.pnp
 .pnp.js
+Snippets.txt
 
 # testing
 /coverage
