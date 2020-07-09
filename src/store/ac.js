@@ -41,6 +41,18 @@ export const auth = creds => async (dispatch, getState, {getFirebase}) => {
 
 };
 export const logout = () => ({type: Constance.SIGN_OUT_USER});
+export const socialLogin = (selectedProvider) => async (dispatch, getState, {getFirebase}) => {
+  const firebase = getFirebase();
+  try {
+    dispatch(closeModal());
+    await firebase.login({
+      provider: selectedProvider,
+      type: 'popup'
+    })
+  } catch (e) {
+    console.log(e)
+  }
+};
 
 //Register ac
 export const registerUser = user => async (dispatch, getState, {getFirebase}) => {

@@ -5,13 +5,13 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 
 import {TextInput} from '../../common/form/TextInput';
-import {auth} from '../../../store/ac';
+import {auth, socialLogin} from '../../../store/ac';
 import {SocialLogin} from '../SocialLogin/SocialLogin';
 
 
 const LoginForm = (props) => {
 
-  const {auth, handleSubmit, error} = props;
+  const {auth, handleSubmit, error, socialLogin} = props;
 
   return (
     <Form size='large' onSubmit={handleSubmit(auth)} autoComplete='off'>
@@ -35,13 +35,13 @@ const LoginForm = (props) => {
         <Divider horizontal>
           Or
         </Divider>
-        <SocialLogin />
+        <SocialLogin login={socialLogin}/>
       </Segment>
     </Form>
   );
 };
 
 export default compose(
-  connect(null, {auth}),
+  connect(null, {auth, socialLogin}),
   reduxForm({form: 'LoginForm'}),
 )(LoginForm);
