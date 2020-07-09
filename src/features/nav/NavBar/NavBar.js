@@ -15,7 +15,7 @@ import {withFirebase} from 'react-redux-firebase';
 
 const NavBar = (props) => {
 
-  const {history, openModal, auth, firebase: {logout}} = props;
+  const {history, openModal, auth, firebase: {logout}, profile} = props;
 
 
   const handleSignIn = () => {
@@ -55,7 +55,11 @@ const NavBar = (props) => {
         </>
         }
         {auth.uid && !auth.authError && auth.isLoaded
-          ? <SignedInMenu signIn={handleSignOut} currentUser={auth.email}/>
+          ? <SignedInMenu
+            signIn={handleSignOut}
+            currentUser={auth.email}
+            profile={profile}
+          />
           : <SignedOutMenu handleRegister={handleRegister} signOut={handleSignIn}/>
         }
       </Container>
@@ -64,7 +68,8 @@ const NavBar = (props) => {
 };
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth
+  auth: state.firebase.auth,
+  profile: state.firebase.profile
 });
 
 export default compose(

@@ -8,12 +8,12 @@ import user from '../../../assets/images/user.png'
 
 export const SignedInMenu = (props) => {
 
-  const {signIn, currentUser} = props;
+  const {signIn, currentUser, profile} = props;
 
   return (
       <Menu.Item position='right'>
-        <Image avatar spaced='right' src={user} />
-        <Dropdown pointing='top left' text={currentUser}>
+        <Image avatar spaced='right' src={profile.avatarUrl || user} />
+        <Dropdown pointing='top left' text={profile.displayName}>
           <Dropdown.Menu>
             <Dropdown.Item text='Create Event' icon='plus' />
             <Dropdown.Item text='My Events' icon='calendar' />

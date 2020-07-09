@@ -41,14 +41,14 @@ export const auth = creds => async (dispatch, getState, {getFirebase}) => {
 
 };
 export const logout = () => ({type: Constance.SIGN_OUT_USER});
-export const socialLogin = (selectedProvider) => async (dispatch, getState, {getFirebase}) => {
+export const socialLogin = (selectedProvider) => async (dispatch, getState, {getFirebase, getFirestore}) => {
   const firebase = getFirebase();
   try {
     dispatch(closeModal());
-    await firebase.login({
+    const user = await firebase.login({
       provider: selectedProvider,
       type: 'popup'
-    })
+    });
   } catch (e) {
     console.log(e)
   }

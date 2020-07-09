@@ -16,7 +16,8 @@ import thunk from 'redux-thunk';
 const rrfConfig = {
   userProfile: 'users',
   attachAuthIsReady: true,
-  useFirestoreForProfile: true
+  useFirestoreForProfile: true,
+  updateProfileOnLogin: false
 }
 
 const fbConfig = {
