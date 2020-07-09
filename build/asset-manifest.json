@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.eed35357.chunk.css",
+    "main.js": "/static/js/main.4202eddb.chunk.js",
+    "main.js.map": "/static/js/main.4202eddb.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.66257bb2.js",
+    "runtime-main.js.map": "/static/js/runtime-main.66257bb2.js.map",
+    "static/css/2.d03e0a67.chunk.css": "/static/css/2.d03e0a67.chunk.css",
+    "static/js/2.b6128724.chunk.js": "/static/js/2.b6128724.chunk.js",
+    "static/js/2.b6128724.chunk.js.map": "/static/js/2.b6128724.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.75933b162029a30ce33969794fa80590.js": "/precache-manifest.75933b162029a30ce33969794fa80590.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.d03e0a67.chunk.css.map": "/static/css/2.d03e0a67.chunk.css.map",
+    "static/css/main.eed35357.chunk.css.map": "/static/css/main.eed35357.chunk.css.map",
+    "static/js/2.b6128724.chunk.js.LICENSE.txt": "/static/js/2.b6128724.chunk.js.LICENSE.txt",
+    "static/media/culture.jpg": "/static/media/culture.b98b6657.jpg",
+    "static/media/drinks.jpg": "/static/media/drinks.71c2a561.jpg",
+    "static/media/film.jpg": "/static/media/film.0e8ebe96.jpg",
+    "static/media/food.jpg": "/static/media/food.1f3599ab.jpg",
+    "static/media/music.jpg": "/static/media/music.ca543039.jpg",
+    "static/media/travel.jpg": "/static/media/travel.27ad1ef6.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.66257bb2.js",
+    "static/css/2.d03e0a67.chunk.css",
+    "static/js/2.b6128724.chunk.js",
+    "static/css/main.eed35357.chunk.css",
+    "static/js/main.4202eddb.chunk.js"
+  ]
+}
