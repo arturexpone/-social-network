@@ -11,7 +11,7 @@ export const SocialLogin = (props) => {
         <Icon name="facebook" /> Login with Facebook
       </Button>
 
-      <Button type="button" fluid color="google plus">
+      <Button onClick={() => login('google')} type="button" fluid color="google plus">
         <Icon name="google plus" />
         Login with Google
       </Button>
