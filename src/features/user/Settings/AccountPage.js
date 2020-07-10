@@ -80,7 +80,7 @@ const AccountPage = ({ error, updatePassword, handleSubmit, provider }) => {
   return (
     <Segment>
       <Header dividing size='large' content='Account' />
-      {provider === 'password' && !provider
+      {provider === 'password'
           ? noProvider
           : provider === 'google.com'
             ? googleProvider

@@ -1,12 +1,12 @@
 import React from 'react';
 
 import {Grid} from 'semantic-ui-react';
+import {Redirect, Route, Switch} from 'react-router-dom';
 
 import {SettingsNav} from './SettingNav';
-import {BasicPage} from './BasicPage';
+import BasicPage from './BasicPage';
 import {PhotosPage} from './PhotosPage';
 import {AboutPage} from './AboutPage';
-import {Redirect, Route, Switch} from 'react-router-dom';
 import AccountPage from './AccountPage';
 
 export const SettingsDashboard = (props) => {
