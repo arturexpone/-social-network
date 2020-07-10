@@ -3,8 +3,12 @@ import React from 'react';
 import { Segment, Header, Form, Divider, Label, Button, Icon } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
 import {combineValidators, matchesField, isRequired, composeValidators} from 'revalidate';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
 
 import {TextInput} from '../../common/form/TextInput';
+import {updatePassword} from '../../../store/ac';
+import handleSubmit from 'redux-form/lib/handleSubmit';
 
 const validate = combineValidators({
   newPassword1: isRequired({message: 'Please enter a password'}),
@@ -14,59 +18,59 @@ const validate = combineValidators({
   )()
 });
 
-const AccountPage = ({ error }) => {
+const AccountPage = ({ error, updatePassword, handleSubmit }) => {
 
   return (
     <Segment>
-      <Header dividing size="large" content="Account" />
+      <Header dividing size='large' content='Account' />
       <div>
-        <Header color="teal" sub content="Change password" />
+        <Header color='teal' sub content='Change password' />
         <p>Use this form to update your account settings</p>
-        <Form>
+        <Form onSubmit={handleSubmit(updatePassword)}>
           <Field
             width={8}
-            name="newPassword1"
-            type="password"
-            pointing="left"
+            name='newPassword1'
+            type='password'
+            pointing='left'
             inline={true}
             component={TextInput}
             basic={true}
-            placeholder="New Password"
+            placeholder='New Password'
           />
           <Field
             width={8}
-            name="newPassword2"
-            type="password"
+            name='newPassword2'
+            type='password'
             inline={true}
             basic={true}
-            pointing="left"
+            pointing='left'
             component={TextInput}
-            placeholder="Confirm Password"
+            placeholder='Confirm Password'
           />
           {error && (
-            <Label basic color="red">
+            <Label basic color='red'>
               {error}
             </Label>
           )}
           <Divider />
-          <Button size="large" positive content="Update Password" />
+          <Button size='large' positive content='Update Password' style={{marginBottom: '15px'}}/>
         </Form>
       </div>
 
       <div>
-        <Header color="teal" sub content="Facebook Account" />
+        <Header color='teal' sub content='Facebook Account' />
         <p>Please visit Facebook to update your account settings</p>
-        <Button type="button" color="facebook">
-          <Icon name="facebook" />
+        <Button type='button' color='facebook'>
+          <Icon name='facebook' />
           Go to Facebook
         </Button>
       </div>
 
       <div>
-        <Header color="teal" sub content="Google Account" />
+        <Header color='teal' sub content='Google Account' />
         <p>Please visit Google to update your account settings</p>
-        <Button type="button" color="google plus">
-          <Icon name="google plus" />
+        <Button type='button' color='google plus'>
+          <Icon name='google plus' />
           Go to Google
         </Button>
       </div>
@@ -74,4 +78,8 @@ const AccountPage = ({ error }) => {
   );
 };
 
-export default reduxForm({ form: 'account', validate })(AccountPage);
+export default compose(
+  reduxForm({ form: 'account', validate }),
+  connect(null, {updatePassword})
+)
+(AccountPage);

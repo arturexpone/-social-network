@@ -1,7 +1,7 @@
 import {Constance} from './constance';
 import {toastr} from 'react-redux-toastr';
 import 'firebase/auth';
-import {SubmissionError} from 'redux-form';
+import {SubmissionError, reset} from 'redux-form';
 
 
 // Events ac
@@ -65,3 +65,19 @@ export const registerUser = user => async (dispatch, getState, {getFirebase}) =>
   }
 
 };
+
+//Settings ac
+export const updatePassword = (creds) => async (dispatch, getState, {getFirebase}) => {
+  const firebase = getFirebase();
+  const user = firebase.auth().currentUser;
+
+  try {
+    await user.updatePassword(creds.newPassword1);
+    await dispatch(reset('account'));
+    toastr.success('Success', 'Your password has been updated');
+  } catch (e) {
+    throw new SubmissionError({
+      _error: e.message,
+    })
+  }
+}
