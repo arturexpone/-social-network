@@ -4,10 +4,12 @@ import {Segment, Form, Header, Divider, Button} from 'semantic-ui-react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
+import {addYears} from 'date-fns';
 
 import {TextInput} from '../../common/form/TextInput';
 import {DateInput} from '../../common/form/DateInput';
 import {PlaceInput} from '../../common/form/PlaceInput';
+import {RadioInput} from '../../common/form/RadioInput';
 
 
 
@@ -27,13 +29,32 @@ const BasicPage = (props) => {
           placeholder={user.displayName || 'Known As'}
         />
         <Form.Group inline>
-          {/* Gender Radio button */}
+          <label>Gender: </label>
+          <Field
+          name='gender'
+          type='radio'
+          value='male'
+          label='Male'
+          component={RadioInput}
+          />
+          <Field
+            name='gender'
+            type='radio'
+            value='female'
+            label='Female'
+            component={RadioInput}
+          />
         </Form.Group>
         <Field
           width={8}
           name='dateOfBirth'
           component={DateInput}
           placeholder='Date of Birth'
+          dateFormat='dd LLL yyyy'
+          showYearDropdown={true}
+          showMonthDropdown={true}
+          dropdownMode='select'
+          maxDate={addYears(new Date(), -18)}
         />
         <Field
           name='city'

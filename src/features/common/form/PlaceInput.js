@@ -28,8 +28,8 @@ export const PlaceInput = (props) => {
           }>
             {loading && <div>Loading...</div>}
             <List selection>
-              {suggestions.map(suggestion => (
-                <List.Item {...getSuggestionItemProps(suggestion)}>
+              {suggestions.map((suggestion, index) => (
+                <List.Item {...getSuggestionItemProps(suggestion)} key={index}>
                   <List.Header>
                     {suggestion.formattedSuggestion.mainText}
                   </List.Header>
