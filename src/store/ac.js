@@ -12,7 +12,6 @@ export const updateEvent = (payload) => {
 };
 export const deleteEvent = (payload) => ({type: Constance.DELETE_EVENT, payload});
 
-
 // Modals ac
 export const openModal = (modalType, modalProps) => ({
   type: Constance.MODAL_OPEN,
@@ -29,7 +28,8 @@ const login = email => ({
     email
   }
 });
-export const auth = creds => async (dispatch, getState, {getFirebase}) => {
+export const auth = creds =>
+  async (dispatch, getState, {getFirebase}) => {
   const firebase = getFirebase();
   try {
     await firebase.auth().signInWithEmailAndPassword(creds.email,creds.password);
@@ -41,7 +41,8 @@ export const auth = creds => async (dispatch, getState, {getFirebase}) => {
 
 };
 export const logout = () => ({type: Constance.SIGN_OUT_USER});
-export const socialLogin = (selectedProvider) => async (dispatch, getState, {getFirebase, getFirestore}) => {
+export const socialLogin = (selectedProvider) =>
+  async (dispatch, getState, {getFirebase, getFirestore}) => {
   const firebase = getFirebase();
   try {
     dispatch(closeModal());
@@ -55,7 +56,8 @@ export const socialLogin = (selectedProvider) => async (dispatch, getState, {get
 };
 
 //Register ac
-export const registerUser = user => async (dispatch, getState, {getFirebase}) => {
+export const registerUser = user =>
+  async (dispatch, getState, {getFirebase}) => {
   const firebase = getFirebase();
   try {
     await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
@@ -67,7 +69,8 @@ export const registerUser = user => async (dispatch, getState, {getFirebase}) =>
 };
 
 //Settings ac
-export const updatePassword = (creds) => async (dispatch, getState, {getFirebase}) => {
+export const updatePassword = (creds) =>
+  async (dispatch, getState, {getFirebase}) => {
   const firebase = getFirebase();
   const user = firebase.auth().currentUser;
 
@@ -80,4 +83,17 @@ export const updatePassword = (creds) => async (dispatch, getState, {getFirebase
       _error: e.message,
     })
   }
-}
+};
+
+// User ac
+export const updateProfile = user =>
+  async (dispatch, getState, {getFirebase}) => {
+  const firebase = getFirebase();
+
+  try {
+    await firebase.updateProfile(user);
+    toastr.success('Success', 'Your profile has been updated')
+  } catch (e) {
+    console.log(e)
+  }
+  }
