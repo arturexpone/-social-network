@@ -6,7 +6,7 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import {SettingsNav} from './SettingNav';
 import BasicPage from './BasicPage';
 import {PhotosPage} from './PhotosPage';
-import {AboutPage} from './AboutPage';
+import AboutPage from './AboutPage';
 import AccountPage from './AccountPage';
 
 export const SettingsDashboard = (props) => {
