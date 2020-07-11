@@ -89,9 +89,9 @@ export const updatePassword = (creds) =>
 export const updateProfile = user =>
   async (dispatch, getState, {getFirebase}) => {
   const firebase = getFirebase();
-
+  const {isLoaded, isEmpty, ...updatedUser} = user;
   try {
-    await firebase.updateProfile(user);
+    await firebase.updateProfile(updatedUser);
     toastr.success('Success', 'Your profile has been updated')
   } catch (e) {
     console.log(e)

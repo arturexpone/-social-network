@@ -6,21 +6,23 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {addYears} from 'date-fns';
 
+import {updateProfile} from '../../../store/ac';
+
 import {TextInput} from '../../common/form/TextInput';
 import {DateInput} from '../../common/form/DateInput';
 import {PlaceInput} from '../../common/form/PlaceInput';
 import {RadioInput} from '../../common/form/RadioInput';
 
 
-
 const BasicPage = (props) => {
 
-  const {pristine, submitting, user} = props;
+  const {pristine, submitting, user,
+         updateProfile, handleSubmit} = props;
 
   return (
     <Segment>
       <Header dividing size='large' content='Basics' />
-      <Form>
+      <Form onSubmit={handleSubmit(updateProfile)}>
         <Field
           width={8}
           name='displayName'
@@ -75,6 +77,6 @@ export default compose(
   reduxForm({form: 'userProfile', enableReinitialize: true}),
   connect((state) => ({
     user: state.firebase.profile
-  }), null)
+  }), {updateProfile})
 )
 (BasicPage);
